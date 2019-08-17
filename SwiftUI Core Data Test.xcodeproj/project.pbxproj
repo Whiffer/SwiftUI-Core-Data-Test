@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1322FA922307C23200DBBB0F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1322FA912307C23200DBBB0F /* README.md */; };
 		13752AE422F8DE1900F131BF /* EntityFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13752AE322F8DE1900F131BF /* EntityFormView.swift */; };
 		13752AEA22FA048600F131BF /* ToDos.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 13752AE922FA048600F131BF /* ToDos.rtf */; };
 		139015FD22C2E1A800EA7B48 /* EntityEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139015FC22C2E1A800EA7B48 /* EntityEditView.swift */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		131A3F0622C551C3006ED555 /* SwiftUI Core Data Test.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SwiftUI Core Data Test.entitlements"; sourceTree = "<group>"; };
+		1322FA912307C23200DBBB0F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		13752AE322F8DE1900F131BF /* EntityFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityFormView.swift; sourceTree = "<group>"; };
 		13752AE922FA048600F131BF /* ToDos.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = ToDos.rtf; sourceTree = "<group>"; };
 		139015FC22C2E1A800EA7B48 /* EntityEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityEditView.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 		139CD87022C2A4D500E99642 = {
 			isa = PBXGroup;
 			children = (
+				1322FA912307C23200DBBB0F /* README.md */,
 				13752AE922FA048600F131BF /* ToDos.rtf */,
 				139CD88022C2A4D500E99642 /* SwiftUI_Core_Data_Test.xcdatamodeld */,
 				139CD87B22C2A4D500E99642 /* SwiftUI Core Data Test */,
@@ -199,6 +202,7 @@
 			files = (
 				13752AEA22FA048600F131BF /* ToDos.rtf in Resources */,
 				139CD88C22C2A4D600E99642 /* LaunchScreen.storyboard in Resources */,
+				1322FA922307C23200DBBB0F /* README.md in Resources */,
 				139CD88922C2A4D600E99642 /* Preview Assets.xcassets in Resources */,
 				139CD88622C2A4D600E99642 /* Assets.xcassets in Resources */,
 			);
