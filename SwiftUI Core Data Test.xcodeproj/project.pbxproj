@@ -22,6 +22,8 @@
 		139CD89622C2A57800E99642 /* EntityListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139CD89522C2A57800E99642 /* EntityListView.swift */; };
 		139CD8A222C2AC7200E99642 /* Entity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139CD8A022C2AC7200E99642 /* Entity+CoreDataClass.swift */; };
 		139CD8A322C2AC7200E99642 /* Entity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139CD8A122C2AC7200E99642 /* Entity+CoreDataProperties.swift */; };
+		13CFEE90230B4949002EFF1A /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CFEE8E230B4949002EFF1A /* AddButton.swift */; };
+		13CFEE91230B4949002EFF1A /* EntityListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CFEE8F230B4949002EFF1A /* EntityListCell.swift */; };
 		13E0535A22CFB6BB008664A4 /* EntityAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E0535922CFB6BB008664A4 /* EntityAddView.swift */; };
 		13F166AB2300732B00F4DBA0 /* CoreDataDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F166AA2300732B00F4DBA0 /* CoreDataDataSource.swift */; };
 /* End PBXBuildFile section */
@@ -45,6 +47,8 @@
 		139CD89522C2A57800E99642 /* EntityListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityListView.swift; sourceTree = "<group>"; };
 		139CD8A022C2AC7200E99642 /* Entity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		139CD8A122C2AC7200E99642 /* Entity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		13CFEE8E230B4949002EFF1A /* AddButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
+		13CFEE8F230B4949002EFF1A /* EntityListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityListCell.swift; sourceTree = "<group>"; };
 		13E0535922CFB6BB008664A4 /* EntityAddView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityAddView.swift; sourceTree = "<group>"; };
 		13F166AA2300732B00F4DBA0 /* CoreDataDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,9 +130,11 @@
 			children = (
 				139CD88322C2A4D500E99642 /* ContentView.swift */,
 				139CD89522C2A57800E99642 /* EntityListView.swift */,
+				13CFEE8F230B4949002EFF1A /* EntityListCell.swift */,
 				139015FC22C2E1A800EA7B48 /* EntityEditView.swift */,
 				13E0535922CFB6BB008664A4 /* EntityAddView.swift */,
 				13752AE322F8DE1900F131BF /* EntityFormView.swift */,
+				13CFEE8E230B4949002EFF1A /* AddButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -215,6 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13CFEE91230B4949002EFF1A /* EntityListCell.swift in Sources */,
 				139015FD22C2E1A800EA7B48 /* EntityEditView.swift in Sources */,
 				139CD88222C2A4D500E99642 /* SwiftUI_Core_Data_Test.xcdatamodeld in Sources */,
 				139CD8A322C2AC7200E99642 /* Entity+CoreDataProperties.swift in Sources */,
@@ -226,6 +233,7 @@
 				139CD8A222C2AC7200E99642 /* Entity+CoreDataClass.swift in Sources */,
 				13F166AB2300732B00F4DBA0 /* CoreDataDataSource.swift in Sources */,
 				139CD87F22C2A4D500E99642 /* SceneDelegate.swift in Sources */,
+				13CFEE90230B4949002EFF1A /* AddButton.swift in Sources */,
 				13752AE422F8DE1900F131BF /* EntityFormView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

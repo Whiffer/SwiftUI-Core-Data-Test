@@ -32,31 +32,18 @@ struct EntityListView : View {
                 {
                     
                     ForEach(datasource.fetchedObjects) { entity in
-                            
-                            NavigationLink(destination: EntityEditView(entity: entity)) {
-
-                                HStack {
-                                    Text(entity.name)
-                                        .font(.headline)
-                                    Spacer()
-                                    Text(String(entity.order))
-                                        .font(.subheadline)
-                                        .foregroundColor(.gray)
-                                }
-                            }
-                            }
+                        
+                        NavigationLink(destination: EntityEditView(entity: entity)) {
+                            EntityListCell(name: entity.name, order: entity.order)
+                        }
+                    }
                     .onMove(perform: (self.sortAscending ? self.move : nil))    // Move only allowed if ascending sort
                     .onDelete(perform: self.delete)
- 
-                }
-
-                Section() {
-                    NavigationLink(destination: EntityAddView()) { Text("Add New Entity") }
                 }
             }
             .listStyle(GroupedListStyle())
             .navigationBarTitle(Text("Entities"), displayMode: .large)
-            .navigationBarItems(trailing: EditButton() )
+            .navigationBarItems(trailing: HStack { AddButton(destination: EntityAddView()) ; EditButton() } )
             .onAppear(perform: { self.onAppear() })
         }
     }
