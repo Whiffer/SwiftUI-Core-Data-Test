@@ -37,7 +37,7 @@ struct EntityEditView : View {
         
         self.textName = ""
         self.textOrder = ""
-        self.presentationMode.value.dismiss()
+        self.presentationMode.wrappedValue.dismiss()
     }
     
     func saveAction() {

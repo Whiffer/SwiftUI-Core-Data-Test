@@ -40,7 +40,7 @@ struct EntityAddView : View {
     
     func cancelAction() {
         
-        self.presentationMode.value.dismiss()
+        self.presentationMode.wrappedValue.dismiss()
     }
     
     func saveAction() {
