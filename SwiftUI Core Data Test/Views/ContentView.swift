@@ -13,8 +13,8 @@ struct ContentView : View {
     var body: some View {
         
         HStack {
-            EntityListView()
-            EntityListView()
+            ItemListView()
+//            ItemListView()
         }
     }
 }

@@ -16,22 +16,117 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
     
     let objectWillChange = PassthroughSubject<Void, Never>()
     
-    // MARK: Private methods
+    //MARK: - Initializers
+    
+    override init() {
+        
+        self.sortKey1 = "order"
+        self.sortKey2 = nil
+        self.sectionNameKeyPath = nil
+        
+        self.predicate = nil
+        self.predicateKey = nil
+        self.predicateObject = nil
+        
+        super.init()
+    }
+    
+    init(sortKey1: String?,
+         sortKey2: String?,
+         sectionNameKeyPath: String?,
+         predicate: NSPredicate?,
+         predicateKey: String?) {
+        
+        self.sortKey1 = sortKey1
+        self.sortKey2 = sortKey2
+        self.sectionNameKeyPath = sectionNameKeyPath
+        
+        self.predicate = predicate
+        self.predicateKey = predicateKey
+        self.predicateObject = nil
+
+        super.init()
+    }
+    
+    //MARK: - Private Properties
+    
+    private var sortKey1: String?
+    private var sortKey2: String?
+    private var sectionNameKeyPath: String?
+    
+    private var predicate: NSPredicate?
+    private var predicateKey: String?
+    private var predicateObject: NSManagedObject?
     
     private lazy var frc: NSFetchedResultsController<T> = {
         
-        let fetchRequest: NSFetchRequest<T> = T.fetchRequest() as! NSFetchRequest<T>
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
+        return configureFetchedResultsController()
+    }()
+    
+    // MARK: Private Methods
+    
+    private func configureFetchedResultsController() -> NSFetchedResultsController<T> {
         
-        let fetchedResultsController = NSFetchedResultsController(
+        let fetchRequest: NSFetchRequest<T> = T.fetchRequest() as! NSFetchRequest<T>
+        fetchRequest.fetchBatchSize = 0
+        
+        if let sortKey1 = sortKey1 {
+            
+            if let sortKey2 = sortKey2 {
+                
+                let sortDescriptor1 = NSSortDescriptor(key: sortKey1, ascending: true)
+                let sortDescriptor2 = NSSortDescriptor(key: sortKey2, ascending: true)
+                fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
+            } else {
+                
+                let sortDescriptor = NSSortDescriptor(key: sortKey1, ascending: true)
+                fetchRequest.sortDescriptors = [sortDescriptor]
+            }
+        }
+        
+        if let _ = predicate {
+            fetchRequest.predicate = predicate
+        } else {
+            
+            if let predicateKey = predicateKey {
+                
+                if let predicateObject = self.predicateObject {
+                    
+                    let predicateString = String(format: "%@%@", predicateKey, " == %@")
+                    fetchRequest.predicate = NSPredicate(format: predicateString, predicateObject)
+                } else {
+                    
+                    let predicateString = String(format: "%@%@", predicateKey, " = $OBJ")
+                    let predicate = NSPredicate(format: predicateString)
+                    fetchRequest.predicate = predicate.withSubstitutionVariables(["OBJ": NSNull()])
+                }
+            } else {
+                fetchRequest.predicate = nil
+            }
+        }
+        
+        let frc = NSFetchedResultsController(
             fetchRequest: fetchRequest,
             managedObjectContext: CoreData.stack.context,
-            sectionNameKeyPath: nil,
+            sectionNameKeyPath: sectionNameKeyPath,
             cacheName: nil)
+        frc.delegate = self
         
-        fetchedResultsController.delegate = self
-        return fetchedResultsController
-    }()
+        return frc
+    }
+
+    // MARK: Public Properties
+    
+    public var fetchedObjects: [T] {
+        
+        return frc.fetchedObjects ?? []
+    }
+
+    public var allInOrder:[T] {
+        
+        self.performFetch()
+        return self.fetchedObjects
+    }
     
     // MARK: Public Methods
     
@@ -47,10 +142,13 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
         }
     }
     
-    var fetchedObjects:[T] {
-        get {
-            return self.frc.fetchedObjects ?? []
-        }
+    public func allInOrderRelated(to: NSManagedObject) -> [T] {
+        
+        self.predicateObject = to
+        self.frc = configureFetchedResultsController()
+        
+        self.performFetch()
+        return self.fetchedObjects
     }
     
     public func changeSort(key: String, ascending: Bool) {
@@ -59,6 +157,19 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
         self.performFetch()
     }
 
+    // MARK: Support for sectionNameKeyPath
+    
+    public var sections: [NSFetchedResultsSectionInfo] {
+        
+        self.performFetch()
+        return self.frc.sections!
+    }
+    
+    public func objects(forSection: NSFetchedResultsSectionInfo) -> [T] {
+        
+        return forSection.objects as! [T]
+    }
+    
     // MARK: CoreDataDataSource + NSFetchedResultsControllerDelegate
     
     public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {

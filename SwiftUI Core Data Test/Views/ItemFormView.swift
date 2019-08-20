@@ -1,5 +1,5 @@
 //
-//  EntityFormView.swift
+//  ItemFormView.swift
 //  SwiftUI Core Data Test
 //
 //  Created by Chuck Hartman on 8/5/19.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct EntityFormView: View {
+struct ItemFormView: View {
     
     @Binding var textName: String
     @Binding var textOrder: String
@@ -16,7 +16,7 @@ struct EntityFormView: View {
     var body: some View {
         
         Form {
-            Section(header: Text("Entity".uppercased())) {
+            Section(header: Text("Item".uppercased())) {
                 
                 VStack {
                     HStack {
@@ -24,7 +24,7 @@ struct EntityFormView: View {
                             .foregroundColor(.gray)
                         Spacer()
                     }
-                    TextField("Enter Entity Name", text: self.$textName)
+                    TextField("Enter Item Name", text: self.$textName)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 
@@ -43,12 +43,12 @@ struct EntityFormView: View {
 }
 
 #if DEBUG
-struct EntityFormView_Previews : PreviewProvider {
+struct ItemFormView_Previews : PreviewProvider {
     
     static var previews: some View {
         
         NavigationView {
-            EntityFormView(textName: .constant("Item 0"), textOrder: .constant("0"))
+            ItemFormView(textName: .constant("Item 0"), textOrder: .constant("0"))
         }
     }
 }

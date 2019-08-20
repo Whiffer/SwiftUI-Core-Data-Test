@@ -1,18 +1,17 @@
 //
-//  Entity+CoreDataClass.swift
+//  Item+CoreDataClass.swift
 //  SwiftUI Core Data Test
 //
-//  Created by Chuck Hartman on 6/25/19.
+//  Created by Chuck Hartman on 8/19/19.
 //  Copyright © 2019 ForeTheGreen. All rights reserved.
 //
 //
 
+import Foundation
 import CoreData
-import SwiftUI
-import Combine
 
-@objc(Entity)
-public class Entity: NSManagedObject, Identifiable {
+@objc(Item)
+public class Item: NSManagedObject, Identifiable {
 
     //MARK: Helpers
     
@@ -20,7 +19,7 @@ public class Entity: NSManagedObject, Identifiable {
         
         let context = CoreData.stack.context
         
-        let fetchRequest: NSFetchRequest<Entity> = Entity.fetchRequest()
+        let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
         
         do {
             let count = try context.count(for: fetchRequest)
@@ -44,7 +43,7 @@ public class Entity: NSManagedObject, Identifiable {
         expressionDescriptions.append(expressionDescription)
         
         // Build out our fetch request the usual way
-        let request: NSFetchRequest<NSFetchRequestResult> = Entity.fetchRequest()
+        let request: NSFetchRequest<NSFetchRequestResult> = Item.fetchRequest()
         request.resultType = .dictionaryResultType
         request.propertiesToFetch = expressionDescriptions
         request.predicate = nil
@@ -59,7 +58,7 @@ public class Entity: NSManagedObject, Identifiable {
                 // Return one more than the current max order
                 return maxNumber.intValue + 1
             } else {
-                // If no entities present, return 0
+                // If no items present, return 0
                 return 0
             }
         } catch _ {
@@ -68,7 +67,7 @@ public class Entity: NSManagedObject, Identifiable {
         }
     }
     
-    class func reorder(from source: IndexSet, to before: Int, within: [Entity] ) {
+    class func reorder(from source: IndexSet, to before: Int, within: [Item] ) {
         
         let firstIndex = source.min()!
         let lastIndex = source.max()!
@@ -118,7 +117,7 @@ public class Entity: NSManagedObject, Identifiable {
         }
     }
     
-    class func delete(from source: IndexSet, within: [Entity] ) {
+    class func delete(from source: IndexSet, within: [Item] ) {
         
         CoreData.executeBlockAndCommit {
             for index in source {
@@ -127,9 +126,9 @@ public class Entity: NSManagedObject, Identifiable {
         }
     }
     
-    class func allInOrder() -> [Entity] {
+    class func allInOrder() -> [Item] {
         
-        let fetchRequest: NSFetchRequest<Entity> = Entity.fetchRequest()
+        let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
         fetchRequest.fetchBatchSize = 0
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
         fetchRequest.predicate = nil
@@ -139,13 +138,13 @@ public class Entity: NSManagedObject, Identifiable {
             return objects
         } catch let error as NSError {
             print("Unresolved error \(error), \(error.userInfo)")
-            return [Entity]()
+            return [Item]()
         }
     }
     
-    class func allSelectedEntities() -> [Entity] {
+    class func allSelectedItems() -> [Item] {
         
-        let fetchRequest: NSFetchRequest<Entity> = Entity.fetchRequest()
+        let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
         fetchRequest.fetchBatchSize = 0
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
         fetchRequest.predicate = NSPredicate(format:"selected = true")
@@ -155,22 +154,22 @@ public class Entity: NSManagedObject, Identifiable {
             return objects
         } catch let error as NSError {
             print("Unresolved error \(error), \(error.userInfo)")
-            return [Entity]()
+            return [Item]()
         }
     }
     
     //MARK: CRUD
     
-    class func newEntity() -> Entity {
+    class func newItem() -> Item {
         
-        return Entity(context: CoreData.stack.context)
+        return Item(context: CoreData.stack.context)
     }
     
-    class func createEntity(name: String, order: Int?) -> Void {
+    class func createItem(name: String, order: Int?) -> Void {
         
-        let newEntity = Entity.newEntity()
-        newEntity.name = name
-        newEntity.order = Int32(order ?? 0)
+        let newItem = Item.newItem()
+        newItem.name = name
+        newItem.order = Int32(order ?? 0)
         CoreData.stack.save()
     }
     

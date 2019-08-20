@@ -51,9 +51,9 @@ class CoreData: NSObject {
     
     public class func initialDbSetup() -> Void {
         
-        if Entity.count() == 0 {
+        if Item.count() == 0 {
             for i in 0...4 {
-                Entity.createEntity(name: "Item \(i)",order: i)
+                Item.createItem(name: "Item \(i)",order: i)
             }
         }
     }

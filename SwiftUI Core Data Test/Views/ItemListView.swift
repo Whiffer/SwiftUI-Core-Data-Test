@@ -1,5 +1,5 @@
 //
-//  EntityListView.swift
+//  ItemListView.swift
 //  SwiftUI Core Data Test
 //
 //  Created by Chuck Hartman on 6/25/19.
@@ -9,9 +9,9 @@
 import SwiftUI
 import CoreData
 
-struct EntityListView : View {
+struct ItemListView : View {
     
-    @ObservedObject var datasource: CoreDataDataSource<Entity> = CoreDataDataSource<Entity>()
+    @ObservedObject var datasource: CoreDataDataSource<Item> = CoreDataDataSource<Item>()
     
     @State var sortAscending: Bool = true
     
@@ -22,7 +22,7 @@ struct EntityListView : View {
                 
                 Section(header:
                     HStack {
-                        Text("All Entities ".uppercased() )
+                        Text("All Items ".uppercased() )
                         Spacer()
                         Image(systemName: (sortAscending ? "arrow.down" : "arrow.up"))
                             .foregroundColor(.blue)
@@ -31,10 +31,10 @@ struct EntityListView : View {
                     )
                 {
                     
-                    ForEach(datasource.fetchedObjects) { entity in
+                    ForEach(datasource.fetchedObjects) { item in
                         
-                        NavigationLink(destination: EntityEditView(entity: entity)) {
-                            EntityListCell(name: entity.name, order: entity.order)
+                        NavigationLink(destination: ItemEditView(item: item)) {
+                            ItemListCell(name: item.name, order: item.order)
                         }
                     }
                     .onMove(perform: (self.sortAscending ? self.move : nil))    // Move only allowed if ascending sort
@@ -42,8 +42,8 @@ struct EntityListView : View {
                 }
             }
             .listStyle(GroupedListStyle())
-            .navigationBarTitle(Text("Entities"), displayMode: .large)
-            .navigationBarItems(trailing: HStack { AddButton(destination: EntityAddView()) ; EditButton() } )
+            .navigationBarTitle(Text("Items"), displayMode: .large)
+            .navigationBarItems(trailing: HStack { AddButton(destination: ItemAddView()) ; EditButton() } )
             .onAppear(perform: { self.onAppear() })
         }
     }
@@ -55,12 +55,12 @@ struct EntityListView : View {
     
     public func move(from source: IndexSet, to destination: Int) {
         
-        Entity.reorder(from: source, to: destination, within: Array(self.datasource.fetchedObjects) )
+        Item.reorder(from: source, to: destination, within: Array(self.datasource.fetchedObjects) )
     }
     
     public func delete(from source: IndexSet) {
         
-        Entity.delete(from: source, within: self.datasource.fetchedObjects)
+        Item.delete(from: source, within: self.datasource.fetchedObjects)
     }
     
     public func onToggleSort() {
@@ -72,12 +72,12 @@ struct EntityListView : View {
 }
 
 #if DEBUG
-struct EntityListView_Previews : PreviewProvider {
+struct ItemListView_Previews : PreviewProvider {
     
     static var previews: some View {
         
         NavigationView {
-            EntityListView()
+            ItemListView()
         }
     }
 }
