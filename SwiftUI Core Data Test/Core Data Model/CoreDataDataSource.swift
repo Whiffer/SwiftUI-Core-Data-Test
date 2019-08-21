@@ -196,7 +196,7 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
 
     public var allInOrder:[T] {
         
-        self.performFetch()
+        self.fetchResults()
         return self.fetchedObjects
     }
     
@@ -204,7 +204,7 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
     
     public func performFetch() {
         
-//        self.objectWillChange.send()
+        self.objectWillChange.send()
         self.fetchResults()
     }
     

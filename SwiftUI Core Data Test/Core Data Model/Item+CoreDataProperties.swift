@@ -20,6 +20,6 @@ extension Item {
     @NSManaged public var name: String
     @NSManaged public var order: Int32
     @NSManaged public var selected: Bool
-    @NSManaged public var attribute: Attribute?
+    @NSManaged public var attribute: Attribute
 
 }

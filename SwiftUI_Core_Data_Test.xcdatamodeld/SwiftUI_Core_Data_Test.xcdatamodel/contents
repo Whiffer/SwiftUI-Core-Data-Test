@@ -3,13 +3,13 @@
     <entity name="Attribute" representedClassName="Attribute" syncable="YES">
         <attribute name="name" attributeType="String" defaultValueString=""/>
         <attribute name="order" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="attribute" inverseEntity="Item"/>
+        <relationship name="item" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="attribute" inverseEntity="Item"/>
     </entity>
     <entity name="Item" representedClassName="Item" syncable="YES">
         <attribute name="name" attributeType="String" defaultValueString=""/>
         <attribute name="order" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="selected" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <relationship name="attribute" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Attribute" inverseName="item" inverseEntity="Attribute"/>
+        <relationship name="attribute" toMany="YES" deletionRule="Cascade" destinationEntity="Attribute" inverseName="item" inverseEntity="Attribute"/>
     </entity>
     <elements>
         <element name="Attribute" positionX="-302.68359375" positionY="-76.6796875" width="128" height="88"/>

@@ -29,6 +29,44 @@ public class Attribute: NSManagedObject, Identifiable {
         }
     }
     
+    class func nextOrderFor(item: Item) -> Int {
+        
+        let keyPathExpression = NSExpression.init(forKeyPath: "order")
+        let maxNumberExpression = NSExpression.init(forFunction: "max:", arguments: [keyPathExpression])
+        
+        let expressionDescription = NSExpressionDescription()
+        expressionDescription.name = "maxNumber"
+        expressionDescription.expression = maxNumberExpression
+        expressionDescription.expressionResultType = .decimalAttributeType
+        
+        var expressionDescriptions = [AnyObject]()
+        expressionDescriptions.append(expressionDescription)
+        
+        // Build out our fetch request the usual way
+        let request: NSFetchRequest<NSFetchRequestResult> = Item.fetchRequest()
+        request.resultType = .dictionaryResultType
+        request.propertiesToFetch = expressionDescriptions
+        request.predicate = nil
+        
+        // Our result should to be an array of dictionaries.
+        var results: [[String:AnyObject]]?
+        
+        do {
+            results = try CoreData.stack.context.fetch(request) as? [[String:NSNumber]]
+            
+            if let maxNumber = results?.first!["maxNumber"]  {
+                // Return one more than the current max order
+                return maxNumber.intValue + 1
+            } else {
+                // If no items present, return 0
+                return 0
+            }
+        } catch _ {
+            // If any failure, just return default
+            return 0
+        }
+    }
+    
     //MARK: CRUD
     
     class func newAttribute() -> Attribute {

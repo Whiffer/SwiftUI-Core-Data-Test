@@ -19,6 +19,6 @@ extension Attribute {
 
     @NSManaged public var name: String
     @NSManaged public var order: Int32
-    @NSManaged public var item: Item?
+    @NSManaged public var item: Item
 
 }
