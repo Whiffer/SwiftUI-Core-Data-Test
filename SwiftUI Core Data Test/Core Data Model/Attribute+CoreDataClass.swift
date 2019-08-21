@@ -42,11 +42,13 @@ public class Attribute: NSManagedObject, Identifiable {
         var expressionDescriptions = [AnyObject]()
         expressionDescriptions.append(expressionDescription)
         
+        let predicate = NSPredicate(format: "item == %@", item)
+
         // Build out our fetch request the usual way
-        let request: NSFetchRequest<NSFetchRequestResult> = Item.fetchRequest()
+        let request: NSFetchRequest<NSFetchRequestResult> = Attribute.fetchRequest()
         request.resultType = .dictionaryResultType
         request.propertiesToFetch = expressionDescriptions
-        request.predicate = nil
+        request.predicate = predicate
         
         // Our result should to be an array of dictionaries.
         var results: [[String:AnyObject]]?

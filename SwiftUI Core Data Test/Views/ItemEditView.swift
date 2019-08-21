@@ -11,6 +11,7 @@ import SwiftUI
 struct ItemEditView : View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.editMode) var editMode
 
     var item: Item
     
@@ -30,16 +31,19 @@ struct ItemEditView : View {
                         ItemListCell(name: attribute.name, order: attribute.order)
                     }
                 }
+                .onMove(perform: self.dataSource.move)
+                .onDelete(perform: self.dataSource.delete)
             }
         }
-            .onAppear(perform: { self.onAppear() })
-            .navigationBarTitle(Text("Edit Item"), displayMode: .large)
-            .navigationBarItems(leading: Button(action:{ self.cancelAction() }) { Text("Cancel") },
-                                trailing:
-                HStack {
-                    AddButton(destination: AttributeAddView(item: item))
-                    Button(action:{ self.saveAction() }) { Text("Save") }.disabled(!self.dirty())
-                }
+        .environment(\.editMode, .constant(EditMode.active))
+        .onAppear(perform: { self.onAppear() })
+        .navigationBarTitle(Text("Edit Item"), displayMode: .large)
+        .navigationBarItems(leading: Button(action:{ self.cancelAction() }) { Text("Cancel") },
+                            trailing:
+            HStack {
+                AddButton(destination: AttributeAddView(item: item))
+                Button(action:{ self.saveAction() }) { Text("Save") }.disabled(!self.dirty())
+            }
         )
     }
     

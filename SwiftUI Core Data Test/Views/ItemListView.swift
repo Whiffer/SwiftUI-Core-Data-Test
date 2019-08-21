@@ -55,7 +55,7 @@ struct ItemListView : View {
     
     public func onAppear() {
 
-        self.dataSource.performFetch()
+        self.dataSource.loadDataSource()
     }
     
     public func onToggleSort() {

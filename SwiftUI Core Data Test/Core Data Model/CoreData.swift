@@ -52,14 +52,12 @@ class CoreData: NSObject {
     public class func initialDbSetup() -> Void {
         
         if Item.count() == 0 {
-            print("Attributes count before: \(Attribute.count())")
             for i in 0...4 {
                 let item = Item.createItem(name: "Item \(i)", order: i)
                 for j in 0...4 {
                     Attribute.createAttributeFor(item: item, name: "Attribute \(i).\(j)", order: j)
                 }
             }
-            print("Attributes count after : \(Attribute.count())")
         }
     }
     

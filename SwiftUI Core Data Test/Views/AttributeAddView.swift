@@ -21,15 +21,15 @@ struct AttributeAddView: View {
         
         AttributeFormView(textName: self.$textName, textOrder: self.$textOrder)
             .onAppear(perform: { self.onAppear() })
-            .navigationBarTitle(Text("Add Item"), displayMode: .large)
+            .navigationBarTitle(Text("Add Attribute"), displayMode: .large)
             .navigationBarItems(leading: Button(action:{ self.cancelAction() }) { Text("Cancel") },
                                 trailing: Button(action:{ self.saveAction() }) { Text("Save") }.disabled(!self.dirty()) )
     }
     
     func onAppear() {
         
-        let order = Item.nextOrder()
-        self.textName = "Item \(order)"
+        let order = Attribute.nextOrderFor(item: item)
+        self.textName = "Attribute \(item.order).\(order)"
         self.textOrder = String(order)
     }
     

@@ -58,6 +58,27 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
         self.predicateObject = nil
     }
     
+    init(sortKey1: String?,
+         sortAscending1: Bool,
+         sortKey2: String?,
+         sortAscending2: Bool,
+         sectionNameKeyPath: String?,
+         predicate: NSPredicate?,
+         predicateKey: String?) {
+        
+        super.init()
+        
+        self.sortKey1 = sortKey1
+        self.sortAscending1 = sortAscending1
+        self.sortKey2 = sortKey2
+        self.sortAscending2 = sortAscending2
+        self.sectionNameKeyPath = sectionNameKeyPath
+         
+        self.predicate = predicate
+        self.predicateKey = predicateKey
+        self.predicateObject = nil
+     }
+    
     //MARK: - Private Properties
     
     private var sortKey1: String?
@@ -127,7 +148,7 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
         return frc
     }
 
-    private func fetchResults() {
+    private func performFetch() {
         
         do {
             try self.frc.performFetch()
@@ -196,16 +217,16 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
 
     public var allInOrder:[T] {
         
-        self.fetchResults()
+        self.performFetch()
         return self.fetchedObjects
     }
     
     // MARK: Public Methods
     
-    public func performFetch() {
+    public func loadDataSource() {
         
         self.objectWillChange.send()
-        self.fetchResults()
+        self.performFetch()
     }
     
     public func allInOrderRelated(to: NSManagedObject) -> [T] {
@@ -222,7 +243,7 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
         self.sortAscending1 = ascending
         self.frc = configureFetchedResultsController()
         
-        self.performFetch()
+        self.loadDataSource()
     }
 
     // MARK: Support for List Editing
@@ -247,7 +268,7 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
     
     public var sections: [NSFetchedResultsSectionInfo] {
         
-        self.fetchResults() // Perform fetch without calling objectWillChange else it will loop forever
+        self.performFetch()
         return self.frc.sections!
     }
     

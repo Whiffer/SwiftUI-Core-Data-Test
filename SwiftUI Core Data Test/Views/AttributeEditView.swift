@@ -18,9 +18,12 @@ struct AttributeEditView: View {
 
     var body: some View {
         
-        ItemFormView(textName: self.$textName, textOrder: self.$textOrder)
+        Form {
+            
+            ItemFormView(textName: self.$textName, textOrder: self.$textOrder)
+        }
             .onAppear(perform: { self.onAppear() })
-            .navigationBarTitle(Text("Edit Item"), displayMode: .large)
+            .navigationBarTitle(Text("Edit Attribute"), displayMode: .large)
             .navigationBarItems(leading: Button(action:{ self.cancelAction() }) { Text("Cancel") },
                                 trailing: Button(action:{ self.saveAction() }) { Text("Save") }.disabled(!self.dirty()) )
     }

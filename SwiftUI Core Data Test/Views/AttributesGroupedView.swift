@@ -42,7 +42,7 @@ struct AttributesGroupedView: View {
     
     public func onAppear() {
 
-        self.dataSource.performFetch()
+        self.dataSource.loadDataSource()
     }
 }
 
