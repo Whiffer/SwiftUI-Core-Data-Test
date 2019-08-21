@@ -12,15 +12,21 @@ struct ItemListCell: View {
     
     var name: String
     var order: Int32
-
+    
     var body: some View {
         HStack {
             VStack {
-                Text(name)
-                    .font(.headline)
-                Text(String(order))
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
+                HStack {
+                    Text(name)
+                        .font(.headline)
+                    Spacer()
+                }
+                HStack {
+                    Text(String(order))
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                    Spacer()
+                }
             }
         }
     }

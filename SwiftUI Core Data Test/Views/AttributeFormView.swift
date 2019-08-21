@@ -1,22 +1,22 @@
 //
-//  ItemFormView.swift
+//  AttributeFormView.swift
 //  SwiftUI Core Data Test
 //
-//  Created by Chuck Hartman on 8/5/19.
+//  Created by Chuck Hartman on 8/20/19.
 //  Copyright © 2019 ForeTheGreen. All rights reserved.
 //
 
 import SwiftUI
 
-struct ItemFormView: View {
+struct AttributeFormView: View {
     
     @Binding var textName: String
     @Binding var textOrder: String
 
     var body: some View {
         
-//        Form {
-            Section(header: Text("Item".uppercased())) {
+        Form {
+            Section(header: Text("Attribute".uppercased())) {
                 
                 VStack {
                     HStack {
@@ -24,7 +24,7 @@ struct ItemFormView: View {
                             .foregroundColor(.gray)
                         Spacer()
                     }
-                    TextField("Enter Item Name", text: self.$textName)
+                    TextField("Enter Attribute Name", text: self.$textName)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 
@@ -38,18 +38,12 @@ struct ItemFormView: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
             }
-//        }
-    }
-}
-
-#if DEBUG
-struct ItemFormView_Previews : PreviewProvider {
-    
-    static var previews: some View {
-        
-        NavigationView {
-            ItemFormView(textName: .constant("Item 0"), textOrder: .constant("0"))
         }
     }
 }
-#endif
+
+struct AttributeFormView_Previews: PreviewProvider {
+    static var previews: some View {
+        AttributeFormView(textName: .constant("Attribute 0.0"), textOrder: .constant("0"))
+    }
+}

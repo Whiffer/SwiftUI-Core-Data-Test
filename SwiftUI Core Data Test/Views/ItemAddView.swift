@@ -24,11 +24,14 @@ struct ItemAddView : View {
     
     var body: some View {
         
-        ItemFormView(textName: self.$textName, textOrder: self.$textOrder)
-            .onAppear(perform: { self.onAppear() })
-            .navigationBarTitle(Text("Add Item"), displayMode: .large)
-            .navigationBarItems(leading: Button(action:{ self.cancelAction() }) { Text("Cancel") },
-                                trailing: Button(action:{ self.saveAction() }) { Text("Save") }.disabled(!self.dirty()) )
+        Form {
+            
+            ItemFormView(textName: self.$textName, textOrder: self.$textOrder)
+                .onAppear(perform: { self.onAppear() })
+                .navigationBarTitle(Text("Add Item"), displayMode: .large)
+                .navigationBarItems(leading: Button(action:{ self.cancelAction() }) { Text("Cancel") },
+                                    trailing: Button(action:{ self.saveAction() }) { Text("Save") }.disabled(!self.dirty()) )
+        }
     }
     
     func onAppear() {
@@ -45,7 +48,7 @@ struct ItemAddView : View {
     
     func saveAction() {
         
-        Item.createItem(name: self.textName, order: Int(self.textOrder))
+        _ = Item.createItem(name: self.textName, order: Int(self.textOrder))
         self.cancelAction()
     }
     

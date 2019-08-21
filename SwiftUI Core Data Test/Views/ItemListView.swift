@@ -11,7 +11,7 @@ import CoreData
 
 struct ItemListView : View {
     
-    @ObservedObject var datasource: CoreDataDataSource<Item> = CoreDataDataSource<Item>()
+    @ObservedObject var dataSource = CoreDataDataSource<Item>()
     
     @State var sortAscending: Bool = true
     
@@ -31,42 +31,37 @@ struct ItemListView : View {
                     )
                 {
                     
-                    ForEach(datasource.fetchedObjects) { item in
+                    ForEach(dataSource.fetchedObjects) { item in
                         
                         NavigationLink(destination: ItemEditView(item: item)) {
                             ItemListCell(name: item.name, order: item.order)
                         }
                     }
-                    .onMove(perform: (self.sortAscending ? self.move : nil))    // Move only allowed if ascending sort
-                    .onDelete(perform: self.delete)
+                        .onMove(perform: (self.sortAscending ? self.dataSource.move : nil))    // Move only allowed if ascending sort
+                        .onDelete(perform: self.dataSource.delete)
                 }
             }
             .listStyle(GroupedListStyle())
             .navigationBarTitle(Text("Items"), displayMode: .large)
-            .navigationBarItems(trailing: HStack { AddButton(destination: ItemAddView()) ; EditButton() } )
-            .onAppear(perform: { self.onAppear() })
+            .navigationBarItems(trailing:
+                HStack {
+                    AddButton(destination: ItemAddView())
+                    EditButton()
+                }
+            )
+                .onAppear(perform: { self.onAppear() })
         }
     }
     
     public func onAppear() {
 
-        self.datasource.performFetch()
-    }
-    
-    public func move(from source: IndexSet, to destination: Int) {
-        
-        Item.reorder(from: source, to: destination, within: Array(self.datasource.fetchedObjects) )
-    }
-    
-    public func delete(from source: IndexSet) {
-        
-        Item.delete(from: source, within: self.datasource.fetchedObjects)
+        self.dataSource.performFetch()
     }
     
     public func onToggleSort() {
         
         self.sortAscending.toggle()
-        self.datasource.changeSort(key: "order", ascending: self.sortAscending)
+        self.dataSource.changeSort(key: "order", ascending: self.sortAscending)
     }
 
 }

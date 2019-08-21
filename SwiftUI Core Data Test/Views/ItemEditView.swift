@@ -12,18 +12,35 @@ struct ItemEditView : View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-    @ObservedObject var item: Item
+    var item: Item
     
     @State var textName: String = ""
     @State var textOrder: String = ""
 
+    @ObservedObject var dataSource = CoreDataDataSource<Attribute>(predicateKey: "item")
+    
     var body: some View {
         
-        ItemFormView(textName: self.$textName, textOrder: self.$textOrder)
+        Form {
+            ItemFormView(textName: self.$textName, textOrder: self.$textOrder)
+            Section(header: Text("Attributes".uppercased())) {
+                ForEach(dataSource.allInOrderRelated(to: item)) { attribute in
+                    
+                    NavigationLink(destination: AttributeEditView(attribute: attribute)) {
+                        ItemListCell(name: attribute.name, order: attribute.order)
+                    }
+                }
+            }
+        }
             .onAppear(perform: { self.onAppear() })
             .navigationBarTitle(Text("Edit Item"), displayMode: .large)
             .navigationBarItems(leading: Button(action:{ self.cancelAction() }) { Text("Cancel") },
-                                trailing: Button(action:{ self.saveAction() }) { Text("Save") }.disabled(!self.dirty()) )
+                                trailing:
+                HStack {
+                    AddButton(destination: AttributeAddView(item: item))
+                    Button(action:{ self.saveAction() }) { Text("Save") }.disabled(!self.dirty())
+                }
+        )
     }
     
     func onAppear() {

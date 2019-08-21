@@ -67,65 +67,6 @@ public class Item: NSManagedObject, Identifiable {
         }
     }
     
-    class func reorder(from source: IndexSet, to before: Int, within: [Item] ) {
-        
-        let firstIndex = source.min()!
-        let lastIndex = source.max()!
-        
-        let firstRowToReorder = (firstIndex < before) ? firstIndex : before
-        let lastRowToReorder = (lastIndex > (before-1)) ? lastIndex : (before-1)
-        
-        if firstRowToReorder != lastRowToReorder {
-            
-            CoreData.executeBlockAndCommit {
-                
-                var newOrder = firstRowToReorder
-                if newOrder < firstIndex {
-                    // Moving dragged items up, so re-order dragged items first
-                    
-                    // Re-order dragged items
-                    for index in source {
-                        within[index].setValue(newOrder, forKey: "order")
-                        newOrder = newOrder + 1
-                    }
-                    
-                    // Re-order non-dragged items
-                    for rowToMove in firstRowToReorder..<lastRowToReorder {
-                        if !source.contains(rowToMove) {
-                            within[rowToMove].setValue(newOrder, forKey: "order")
-                            newOrder = newOrder + 1
-                        }
-                    }
-                } else {
-                    // Moving dragged items down, so re-order dragged items last
-                    
-                    // Re-order non-dragged items
-                    for rowToMove in firstRowToReorder...lastRowToReorder {
-                        if !source.contains(rowToMove) {
-                            within[rowToMove].setValue(newOrder, forKey: "order")
-                            newOrder = newOrder + 1
-                        }
-                    }
-                    
-                    // Re-order dragged items
-                    for index in source {
-                        within[index].setValue(newOrder, forKey: "order")
-                        newOrder = newOrder + 1
-                    }
-                }
-            }
-        }
-    }
-    
-    class func delete(from source: IndexSet, within: [Item] ) {
-        
-        CoreData.executeBlockAndCommit {
-            for index in source {
-                within[index].delete()
-            }
-        }
-    }
-    
     class func allInOrder() -> [Item] {
         
         let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
@@ -165,12 +106,14 @@ public class Item: NSManagedObject, Identifiable {
         return Item(context: CoreData.stack.context)
     }
     
-    class func createItem(name: String, order: Int?) -> Void {
+    class func createItem(name: String, order: Int?) -> Item {
         
         let newItem = Item.newItem()
         newItem.name = name
         newItem.order = Int32(order ?? 0)
         CoreData.stack.save()
+        
+        return newItem
     }
     
     public func update(name: String, order: String) {
