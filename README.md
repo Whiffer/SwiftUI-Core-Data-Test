@@ -1,4 +1,4 @@
-# SwiftUI-Core-Data-Data-Source
+# SwiftUI-Core-Data-Data-Test
 Extended sample program to demonstrate how CoreData can be used with SwiftUI.
 
 This project currently compiles and runs on Beta 6.
@@ -13,4 +13,6 @@ This version of CoreDataDataSource has several customization options.
 The App uses a Tabbed View that displays the same CoreData database several ways.
 
 The Data Source also supports nested SwiftUI Lists with correct implementations of move and delete.
+
+This project is still a work in progress.  Several changes will be made in the near future.
 
