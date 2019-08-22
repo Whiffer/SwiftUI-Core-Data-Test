@@ -40,6 +40,14 @@ struct ContentView: View {
                     }
             }
             .tag(2)
+            ItemSelectionView()
+                .tabItem {
+                    VStack {
+                        Image(systemName: "list.bullet")
+                        Text("Selections")
+                    }
+            }
+            .tag(3)
         }
     }
 }

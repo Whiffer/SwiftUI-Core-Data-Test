@@ -23,6 +23,12 @@
 		13B2A8FF230BA12100054945 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B2A8FB230BA12100054945 /* Item+CoreDataProperties.swift */; };
 		13B2A900230BA12100054945 /* Attribute+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B2A8FC230BA12100054945 /* Attribute+CoreDataClass.swift */; };
 		13B2A901230BA12100054945 /* Attribute+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B2A8FD230BA12100054945 /* Attribute+CoreDataProperties.swift */; };
+		13BB3F88230EEB7300F1CA35 /* EditNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB3F87230EEB7200F1CA35 /* EditNavigationLink.swift */; };
+		13BB3F8B230F028E00F1CA35 /* ItemSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB3F8A230F028E00F1CA35 /* ItemSelectionView.swift */; };
+		13BB3F90230F103800F1CA35 /* AddDeleteToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB3F8D230F103800F1CA35 /* AddDeleteToggleStyle.swift */; };
+		13BB3F91230F103800F1CA35 /* ListSelectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB3F8E230F103800F1CA35 /* ListSelectionManager.swift */; };
+		13BB3F95230F12D000F1CA35 /* ItemSelectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB3F93230F12D000F1CA35 /* ItemSelectionManager.swift */; };
+		13BB3F96230F12D000F1CA35 /* CheckmarkToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB3F94230F12D000F1CA35 /* CheckmarkToggleStyle.swift */; };
 		13CD74F2230C82FF00833465 /* AttributesGroupedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CD74F1230C82FF00833465 /* AttributesGroupedView.swift */; };
 		13CD74F4230CBC4200833465 /* AttributeAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CD74F3230CBC4200833465 /* AttributeAddView.swift */; };
 		13CD74F6230CBCF300833465 /* AttributeFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CD74F5230CBCF300833465 /* AttributeFormView.swift */; };
@@ -54,6 +60,12 @@
 		13B2A8FB230BA12100054945 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		13B2A8FC230BA12100054945 /* Attribute+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attribute+CoreDataClass.swift"; sourceTree = "<group>"; };
 		13B2A8FD230BA12100054945 /* Attribute+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attribute+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		13BB3F87230EEB7200F1CA35 /* EditNavigationLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditNavigationLink.swift; sourceTree = "<group>"; };
+		13BB3F8A230F028E00F1CA35 /* ItemSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemSelectionView.swift; sourceTree = "<group>"; };
+		13BB3F8D230F103800F1CA35 /* AddDeleteToggleStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDeleteToggleStyle.swift; sourceTree = "<group>"; };
+		13BB3F8E230F103800F1CA35 /* ListSelectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListSelectionManager.swift; sourceTree = "<group>"; };
+		13BB3F93230F12D000F1CA35 /* ItemSelectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemSelectionManager.swift; sourceTree = "<group>"; };
+		13BB3F94230F12D000F1CA35 /* CheckmarkToggleStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckmarkToggleStyle.swift; sourceTree = "<group>"; };
 		13CD74F1230C82FF00833465 /* AttributesGroupedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesGroupedView.swift; sourceTree = "<group>"; };
 		13CD74F3230CBC4200833465 /* AttributeAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeAddView.swift; sourceTree = "<group>"; };
 		13CD74F5230CBCF300833465 /* AttributeFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeFormView.swift; sourceTree = "<group>"; };
@@ -109,7 +121,11 @@
 			isa = PBXGroup;
 			children = (
 				139CD89F22C2A9A300E99642 /* Delegates */,
-				139CD89E22C2A99400E99642 /* Views */,
+				13BB3F98230F1EF700F1CA35 /* Tab View */,
+				139CD89E22C2A99400E99642 /* Item Views */,
+				13BB3F97230F1EAB00F1CA35 /* Grouped */,
+				13BB3F8C230F0FAD00F1CA35 /* Selections */,
+				13BB3F89230EEBF300F1CA35 /* Helper Views */,
 				139CD89D22C2A96600E99642 /* Core Data Model */,
 				1390164822C32E0200EA7B48 /* Supporting Files */,
 				139CD88722C2A4D600E99642 /* Preview Content */,
@@ -138,10 +154,9 @@
 			path = "Core Data Model";
 			sourceTree = "<group>";
 		};
-		139CD89E22C2A99400E99642 /* Views */ = {
+		139CD89E22C2A99400E99642 /* Item Views */ = {
 			isa = PBXGroup;
 			children = (
-				139CD88322C2A4D500E99642 /* ContentView.swift */,
 				139CD89522C2A57800E99642 /* ItemListView.swift */,
 				13CFEE8F230B4949002EFF1A /* ItemListCell.swift */,
 				13E0535922CFB6BB008664A4 /* ItemAddView.swift */,
@@ -150,11 +165,8 @@
 				13CD74F3230CBC4200833465 /* AttributeAddView.swift */,
 				13CD74F7230CC1A100833465 /* AttributeEditView.swift */,
 				13CD74F5230CBCF300833465 /* AttributeFormView.swift */,
-				13CFEE8E230B4949002EFF1A /* AddButton.swift */,
-				13F9297A230E195100CB4392 /* EditSaveDoneButton.swift */,
-				13CD74F1230C82FF00833465 /* AttributesGroupedView.swift */,
 			);
-			path = Views;
+			path = "Item Views";
 			sourceTree = "<group>";
 		};
 		139CD89F22C2A9A300E99642 /* Delegates */ = {
@@ -164,6 +176,44 @@
 				139CD87E22C2A4D500E99642 /* SceneDelegate.swift */,
 			);
 			path = Delegates;
+			sourceTree = "<group>";
+		};
+		13BB3F89230EEBF300F1CA35 /* Helper Views */ = {
+			isa = PBXGroup;
+			children = (
+				13CFEE8E230B4949002EFF1A /* AddButton.swift */,
+				13F9297A230E195100CB4392 /* EditSaveDoneButton.swift */,
+				13BB3F87230EEB7200F1CA35 /* EditNavigationLink.swift */,
+			);
+			path = "Helper Views";
+			sourceTree = "<group>";
+		};
+		13BB3F8C230F0FAD00F1CA35 /* Selections */ = {
+			isa = PBXGroup;
+			children = (
+				13BB3F8A230F028E00F1CA35 /* ItemSelectionView.swift */,
+				13BB3F93230F12D000F1CA35 /* ItemSelectionManager.swift */,
+				13BB3F8E230F103800F1CA35 /* ListSelectionManager.swift */,
+				13BB3F8D230F103800F1CA35 /* AddDeleteToggleStyle.swift */,
+				13BB3F94230F12D000F1CA35 /* CheckmarkToggleStyle.swift */,
+			);
+			path = Selections;
+			sourceTree = "<group>";
+		};
+		13BB3F97230F1EAB00F1CA35 /* Grouped */ = {
+			isa = PBXGroup;
+			children = (
+				13CD74F1230C82FF00833465 /* AttributesGroupedView.swift */,
+			);
+			path = Grouped;
+			sourceTree = "<group>";
+		};
+		13BB3F98230F1EF700F1CA35 /* Tab View */ = {
+			isa = PBXGroup;
+			children = (
+				139CD88322C2A4D500E99642 /* ContentView.swift */,
+			);
+			path = "Tab View";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,6 +292,8 @@
 				13CFEE91230B4949002EFF1A /* ItemListCell.swift in Sources */,
 				13B2A901230BA12100054945 /* Attribute+CoreDataProperties.swift in Sources */,
 				13B2A8FF230BA12100054945 /* Item+CoreDataProperties.swift in Sources */,
+				13BB3F8B230F028E00F1CA35 /* ItemSelectionView.swift in Sources */,
+				13BB3F95230F12D000F1CA35 /* ItemSelectionManager.swift in Sources */,
 				139015FD22C2E1A800EA7B48 /* ItemEditView.swift in Sources */,
 				139CD88222C2A4D500E99642 /* SwiftUI_Core_Data_Test.xcdatamodeld in Sources */,
 				1390164722C312B200EA7B48 /* CoreData.swift in Sources */,
@@ -253,10 +305,14 @@
 				139CD87D22C2A4D500E99642 /* AppDelegate.swift in Sources */,
 				13B2A900230BA12100054945 /* Attribute+CoreDataClass.swift in Sources */,
 				13CD74F2230C82FF00833465 /* AttributesGroupedView.swift in Sources */,
+				13BB3F88230EEB7300F1CA35 /* EditNavigationLink.swift in Sources */,
 				139CD88422C2A4D500E99642 /* ContentView.swift in Sources */,
 				13F166AB2300732B00F4DBA0 /* CoreDataDataSource.swift in Sources */,
 				139CD87F22C2A4D500E99642 /* SceneDelegate.swift in Sources */,
+				13BB3F96230F12D000F1CA35 /* CheckmarkToggleStyle.swift in Sources */,
+				13BB3F90230F103800F1CA35 /* AddDeleteToggleStyle.swift in Sources */,
 				13CFEE90230B4949002EFF1A /* AddButton.swift in Sources */,
+				13BB3F91230F103800F1CA35 /* ListSelectionManager.swift in Sources */,
 				13752AE422F8DE1900F131BF /* ItemFormView.swift in Sources */,
 				13CD74F8230CC1A100833465 /* AttributeEditView.swift in Sources */,
 			);
@@ -398,7 +454,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"SwiftUI Core Data Test\"/Preview\\ Content";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 64WN437W3Z;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "SwiftUI Core Data Test/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -422,7 +478,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"SwiftUI Core Data Test\"/Preview\\ Content";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 64WN437W3Z;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "SwiftUI Core Data Test/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

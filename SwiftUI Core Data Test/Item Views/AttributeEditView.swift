@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct AttributeEditView: View {
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @ObservedObject var attribute: Attribute
