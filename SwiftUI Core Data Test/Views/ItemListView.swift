@@ -11,8 +11,11 @@ import CoreData
 
 struct ItemListView : View {
     
+    @Environment(\.editMode) var editMode
+    
     @ObservedObject var dataSource = CoreDataDataSource<Item>()
     
+    @State var myEditing: Bool = false
     @State var sortAscending: Bool = true
     
     var body: some View {
@@ -27,14 +30,19 @@ struct ItemListView : View {
                         Image(systemName: (sortAscending ? "arrow.down" : "arrow.up"))
                             .foregroundColor(.blue)
                             .onTapGesture(perform: self.onToggleSort )
-                        }
+                    }
                     )
                 {
                     
                     ForEach(dataSource.fetchedObjects) { item in
                         
-                        NavigationLink(destination: ItemEditView(item: item)) {
+                        //TODO: can this be made into embeddable view?
+                        if self.myEditing {
                             ItemListCell(name: item.name, order: item.order)
+                        } else {
+                            NavigationLink(destination: ItemEditView(item: item)) {
+                                ItemListCell(name: item.name, order: item.order)
+                            }
                         }
                     }
                         .onMove(perform: (self.sortAscending ? self.dataSource.move : nil))    // Move only allowed if ascending sort
@@ -46,7 +54,10 @@ struct ItemListView : View {
             .navigationBarItems(trailing:
                 HStack {
                     AddButton(destination: ItemAddView())
-                    EditButton()
+                    EditSaveDoneButton(editAction: { self.myEditing = true },
+                                       saveAction: { },
+                                       doneAction: { self.myEditing = false },
+                                       dirty: false )
                 }
             )
                 .onAppear(perform: { self.onAppear() })
@@ -54,7 +65,7 @@ struct ItemListView : View {
     }
     
     public func onAppear() {
-
+        
         self.dataSource.loadDataSource()
     }
     
@@ -63,7 +74,7 @@ struct ItemListView : View {
         self.sortAscending.toggle()
         self.dataSource.changeSort(key: "order", ascending: self.sortAscending)
     }
-
+    
 }
 
 #if DEBUG

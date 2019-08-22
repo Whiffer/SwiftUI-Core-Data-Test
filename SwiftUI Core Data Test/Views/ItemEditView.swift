@@ -12,12 +12,12 @@ struct ItemEditView : View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.editMode) var editMode
-
+    
     var item: Item
     
     @State var textName: String = ""
     @State var textOrder: String = ""
-
+    
     @ObservedObject var dataSource = CoreDataDataSource<Attribute>(predicateKey: "item")
     
     var body: some View {
@@ -35,14 +35,15 @@ struct ItemEditView : View {
                 .onDelete(perform: self.dataSource.delete)
             }
         }
-        .environment(\.editMode, .constant(EditMode.active))
         .onAppear(perform: { self.onAppear() })
         .navigationBarTitle(Text("Edit Item"), displayMode: .large)
-        .navigationBarItems(leading: Button(action:{ self.cancelAction() }) { Text("Cancel") },
-                            trailing:
+        .navigationBarItems(trailing:
             HStack {
                 AddButton(destination: AttributeAddView(item: item))
-                Button(action:{ self.saveAction() }) { Text("Save") }.disabled(!self.dirty())
+                EditSaveDoneButton(editAction: { },
+                                   saveAction: { self.saveAction() },
+                                   doneAction: { },
+                                   dirty: self.dirty() )
             }
         )
     }

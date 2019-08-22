@@ -39,11 +39,11 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
         self.sortKey1 = sortKey1
         self.sortKey2 = sortKey2
         self.sectionNameKeyPath = sectionNameKeyPath
-         
+        
         self.predicate = nil
         self.predicateKey = nil
         self.predicateObject = nil
-     }
+    }
     
     init(predicateKey: String?) {
         
@@ -52,7 +52,7 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
         self.sortKey1 = "order"
         self.sortKey2 = nil
         self.sectionNameKeyPath = nil
-
+        
         self.predicate = nil
         self.predicateKey = predicateKey
         self.predicateObject = nil
@@ -73,11 +73,11 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
         self.sortKey2 = sortKey2
         self.sortAscending2 = sortAscending2
         self.sectionNameKeyPath = sectionNameKeyPath
-         
+        
         self.predicate = predicate
         self.predicateKey = predicateKey
         self.predicateObject = nil
-     }
+    }
     
     //MARK: - Private Properties
     
@@ -147,7 +147,7 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
         
         return frc
     }
-
+    
     private func performFetch() {
         
         do {
@@ -214,7 +214,7 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
         
         return frc.fetchedObjects ?? []
     }
-
+    
     public var allInOrder:[T] {
         
         self.performFetch()
@@ -245,7 +245,7 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
         
         self.loadDataSource()
     }
-
+    
     // MARK: Support for List Editing
     
     public func move(from source: IndexSet, to destination: Int) {
@@ -298,5 +298,5 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
         
         self.objectWillChange.send()
     }
-
+    
 }

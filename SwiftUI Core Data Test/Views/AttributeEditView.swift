@@ -10,22 +10,22 @@ import SwiftUI
 
 struct AttributeEditView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
+    
     @ObservedObject var attribute: Attribute
     
     @State var textName: String = ""
     @State var textOrder: String = ""
-
+    
     var body: some View {
         
         Form {
             
             ItemFormView(textName: self.$textName, textOrder: self.$textOrder)
         }
-            .onAppear(perform: { self.onAppear() })
-            .navigationBarTitle(Text("Edit Attribute"), displayMode: .large)
-            .navigationBarItems(leading: Button(action:{ self.cancelAction() }) { Text("Cancel") },
-                                trailing: Button(action:{ self.saveAction() }) { Text("Save") }.disabled(!self.dirty()) )
+        .onAppear(perform: { self.onAppear() })
+        .navigationBarTitle(Text("Edit Attribute"), displayMode: .large)
+        .navigationBarItems(leading: Button(action:{ self.cancelAction() }) { Text("Cancel") },
+                            trailing: Button(action:{ self.saveAction() }) { Text("Save") }.disabled(!self.dirty()) )
     }
     
     func onAppear() {

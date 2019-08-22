@@ -12,7 +12,7 @@ struct AttributeFormView: View {
     
     @Binding var textName: String
     @Binding var textOrder: String
-
+    
     var body: some View {
         
         Form {

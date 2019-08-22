@@ -18,7 +18,7 @@ extension String {
 struct ItemAddView : View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
+    
     @State var textName: String = ""
     @State var textOrder: String = ""
     

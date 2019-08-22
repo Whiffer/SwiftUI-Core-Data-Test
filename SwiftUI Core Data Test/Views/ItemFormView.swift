@@ -15,7 +15,6 @@ struct ItemFormView: View {
 
     var body: some View {
         
-//        Form {
             Section(header: Text("Item".uppercased())) {
                 
                 VStack {
@@ -38,7 +37,6 @@ struct ItemFormView: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
             }
-//        }
     }
 }
 

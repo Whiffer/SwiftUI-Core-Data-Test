@@ -14,6 +14,8 @@ struct AttributesGroupedView: View {
     @ObservedObject var dataSource = CoreDataDataSource<Attribute>(sortKey1: "item.order",
                                                                    sortKey2: "order",
                                                                    sectionNameKeyPath: "item.name")
+    
+    @State var myEditing: Bool = false
 
     var body: some View {
         
@@ -25,8 +27,14 @@ struct AttributesGroupedView: View {
                     Section(header: Text("Attributes for: \(section.name)".uppercased()))
                     {
                         ForEach(self.dataSource.objects(inSection: section)) { attribute in
-
-                            ItemListCell(name: attribute.name, order: attribute.order)
+                            
+                            if self.myEditing {
+                                ItemListCell(name: attribute.name, order: attribute.order)
+                            } else {
+                                NavigationLink(destination: AttributeEditView(attribute: attribute)) {
+                                    ItemListCell(name: attribute.name, order: attribute.order)
+                                }
+                            }
                         }
                         .onMove { self.dataSource.move(from: $0, to: $1, inSection: section ) }
                         .onDelete { self.dataSource.delete(from: $0, inSection: section) }
@@ -35,13 +43,18 @@ struct AttributesGroupedView: View {
             }
             .listStyle(GroupedListStyle())
             .navigationBarTitle(Text("All Attributes"), displayMode: .large)
-            .navigationBarItems(trailing: EditButton() )
+            .navigationBarItems(trailing:
+                EditSaveDoneButton(editAction: { self.myEditing = true },
+                                   saveAction: { },
+                                   doneAction: { self.myEditing = false },
+                                   dirty: false )
+            )
             .onAppear(perform: { self.onAppear() })
         }
     }
     
     public func onAppear() {
-
+        
         self.dataSource.loadDataSource()
     }
 }

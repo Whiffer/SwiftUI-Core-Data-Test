@@ -31,6 +31,7 @@
 		13CFEE91230B4949002EFF1A /* ItemListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CFEE8F230B4949002EFF1A /* ItemListCell.swift */; };
 		13E0535A22CFB6BB008664A4 /* ItemAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E0535922CFB6BB008664A4 /* ItemAddView.swift */; };
 		13F166AB2300732B00F4DBA0 /* CoreDataDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F166AA2300732B00F4DBA0 /* CoreDataDataSource.swift */; };
+		13F9297B230E195100CB4392 /* EditSaveDoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F9297A230E195100CB4392 /* EditSaveDoneButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		13CFEE8F230B4949002EFF1A /* ItemListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListCell.swift; sourceTree = "<group>"; };
 		13E0535922CFB6BB008664A4 /* ItemAddView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemAddView.swift; sourceTree = "<group>"; };
 		13F166AA2300732B00F4DBA0 /* CoreDataDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataDataSource.swift; sourceTree = "<group>"; };
+		13F9297A230E195100CB4392 /* EditSaveDoneButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSaveDoneButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				13CD74F7230CC1A100833465 /* AttributeEditView.swift */,
 				13CD74F5230CBCF300833465 /* AttributeFormView.swift */,
 				13CFEE8E230B4949002EFF1A /* AddButton.swift */,
+				13F9297A230E195100CB4392 /* EditSaveDoneButton.swift */,
 				13CD74F1230C82FF00833465 /* AttributesGroupedView.swift */,
 			);
 			path = Views;
@@ -243,6 +246,7 @@
 				139CD88222C2A4D500E99642 /* SwiftUI_Core_Data_Test.xcdatamodeld in Sources */,
 				1390164722C312B200EA7B48 /* CoreData.swift in Sources */,
 				13E0535A22CFB6BB008664A4 /* ItemAddView.swift in Sources */,
+				13F9297B230E195100CB4392 /* EditSaveDoneButton.swift in Sources */,
 				13CD74F6230CBCF300833465 /* AttributeFormView.swift in Sources */,
 				139CD89622C2A57800E99642 /* ItemListView.swift in Sources */,
 				13CD74F4230CBC4200833465 /* AttributeAddView.swift in Sources */,

@@ -12,7 +12,7 @@ import CoreData
 
 @objc(Item)
 public class Item: NSManagedObject, Identifiable {
-
+    
     //MARK: Helpers
     
     class func count() -> Int {

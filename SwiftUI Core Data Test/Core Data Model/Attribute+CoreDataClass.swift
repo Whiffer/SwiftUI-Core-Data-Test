@@ -12,7 +12,7 @@ import CoreData
 
 @objc(Attribute)
 public class Attribute: NSManagedObject, Identifiable {
-
+    
     //MARK: Helpers
     
     class func count() -> Int {
@@ -43,7 +43,7 @@ public class Attribute: NSManagedObject, Identifiable {
         expressionDescriptions.append(expressionDescription)
         
         let predicate = NSPredicate(format: "item == %@", item)
-
+        
         // Build out our fetch request the usual way
         let request: NSFetchRequest<NSFetchRequestResult> = Attribute.fetchRequest()
         request.resultType = .dictionaryResultType
