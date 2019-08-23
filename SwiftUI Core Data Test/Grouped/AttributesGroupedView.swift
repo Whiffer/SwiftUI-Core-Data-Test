@@ -15,7 +15,9 @@ struct AttributesGroupedView: View {
                                                                    sortKey2: "order",
                                                                    sectionNameKeyPath: "item.name")
     
-    @State var myEditing: Bool = false
+//    @Environment(\.editMode) var editMode
+    // Beta 6: Using private state here because the editMode environment setter doesn't seem to work
+    @State private var editMode: EditMode = .inactive
 
     var body: some View {
         
@@ -28,7 +30,7 @@ struct AttributesGroupedView: View {
                     {
                         ForEach(self.dataSource.objects(inSection: section)) { attribute in
                             
-                            if self.myEditing {
+                            if self.editMode == .active {
                                 ItemListCell(name: attribute.name, order: attribute.order)
                             } else {
                                 NavigationLink(destination: AttributeEditView(attribute: attribute)) {
@@ -44,23 +46,19 @@ struct AttributesGroupedView: View {
             .listStyle(GroupedListStyle())
             .navigationBarTitle(Text("All Attributes"), displayMode: .large)
             .navigationBarItems(trailing:
-                EditSaveDoneButton(editAction: { self.myEditing = true },
+                EditSaveDoneButton(editAction: { self.editMode = .active },
                                    saveAction: { },
-                                   doneAction: { self.myEditing = false },
+                                   doneAction: { self.editMode = .inactive },
                                    dirty: false )
             )
-            .onAppear(perform: { self.onAppear() })
         }
-    }
-    
-    public func onAppear() {
-        
-        self.dataSource.loadDataSource()
     }
 }
 
+#if DEBUG
 struct AttributesGroupedView_Previews: PreviewProvider {
     static var previews: some View {
         AttributesGroupedView()
     }
 }
+#endif

@@ -69,6 +69,28 @@ public class Attribute: NSManagedObject, Identifiable {
         }
     }
     
+    class func allInOrder() -> [Attribute] {
+        
+        let dataSource = CoreDataDataSource<Attribute>(sortKey1: "item.order",
+                                                       sortKey2: "order",
+                                                       sectionNameKeyPath: "item.name")
+        let objects = dataSource.fetch()
+        return objects
+    }
+    
+    #if DEBUG
+    class func preview() -> Attribute {
+        
+        let attributes =  Attribute.allInOrder()
+        if attributes.count > 0 {
+            return attributes.first!
+        } else {
+            let item = Item.createItem(name: "Item Preview", order: 999)
+            return Attribute.createAttributeFor(item: item, name: "Attribute Preview", order: 999)
+        }
+    }
+    #endif
+    
     //MARK: CRUD
     
     class func newAttribute() -> Attribute {
@@ -76,13 +98,14 @@ public class Attribute: NSManagedObject, Identifiable {
         return Attribute(context: CoreData.stack.context)
     }
     
-    class func createAttributeFor(item: Item, name: String, order: Int?) -> Void {
+    class func createAttributeFor(item: Item, name: String, order: Int?) -> Attribute {
         
-        let newAttribute = Attribute.newAttribute()
-        newAttribute.name = name
-        newAttribute.order = Int32(order ?? 0)
-        newAttribute.item = item
+        let attribute = Attribute.newAttribute()
+        attribute.name = name
+        attribute.order = Int32(order ?? 0)
+        attribute.item = item
         CoreData.stack.save()
+        return attribute
     }
     
     public func update(name: String, order: String) {

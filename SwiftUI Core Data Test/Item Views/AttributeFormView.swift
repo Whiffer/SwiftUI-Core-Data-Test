@@ -15,7 +15,6 @@ struct AttributeFormView: View {
     
     var body: some View {
         
-        Form {
             Section(header: Text("Attribute".uppercased())) {
                 
                 VStack {
@@ -38,12 +37,17 @@ struct AttributeFormView: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
             }
-        }
     }
 }
 
+#if DEBUG
 struct AttributeFormView_Previews: PreviewProvider {
     static var previews: some View {
-        AttributeFormView(textName: .constant("Attribute 0.0"), textOrder: .constant("0"))
+        NavigationView {
+            Form {
+             AttributeFormView(textName: .constant("Attribute 0.0"), textOrder: .constant("0"))
+           }
+        }
     }
 }
+#endif

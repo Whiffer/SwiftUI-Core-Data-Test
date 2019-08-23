@@ -27,11 +27,11 @@ struct ItemAddView : View {
         Form {
             
             ItemFormView(textName: self.$textName, textOrder: self.$textOrder)
-                .onAppear(perform: { self.onAppear() })
-                .navigationBarTitle(Text("Add Item"), displayMode: .large)
-                .navigationBarItems(leading: Button(action:{ self.cancelAction() }) { Text("Cancel") },
-                                    trailing: Button(action:{ self.saveAction() }) { Text("Save") }.disabled(!self.dirty()) )
         }
+        .onAppear(perform: { self.onAppear() })
+        .navigationBarTitle(Text("Add Item"), displayMode: .large)
+        .navigationBarItems(leading: Button(action:{ self.cancelAction() }) { Text("Cancel") },
+                            trailing: Button(action:{ self.saveAction() }) { Text("Save") }.disabled(!self.dirty()) )
     }
     
     func onAppear() {

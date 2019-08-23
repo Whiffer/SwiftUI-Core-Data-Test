@@ -14,7 +14,7 @@ struct ItemSelectionView : View {
     @ObservedObject var dataSource = CoreDataDataSource<Item>()
     @ObservedObject var selection: ItemSelectionManager = ItemSelectionManager()
 
-    //    @Environment(\.editMode) var editMode
+//    @Environment(\.editMode) var editMode
     // Beta 6: Using private state here because the editMode environment setter doesn't seem to work
     @State private var editMode: EditMode = .inactive
     

@@ -58,6 +58,19 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
         self.predicateObject = nil
     }
     
+    init(predicate: NSPredicate?) {
+        
+        super.init()
+        
+        self.sortKey1 = "order"
+        self.sortKey2 = nil
+        self.sectionNameKeyPath = nil
+        
+        self.predicate = predicate
+        self.predicateKey = nil
+        self.predicateObject = nil
+    }
+    
     init(sortKey1: String?,
          sortAscending1: Bool,
          sortKey2: String?,
@@ -91,14 +104,22 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
     private var predicateKey: String?
     private var predicateObject: NSManagedObject?
     
+    
+    private lazy var fetchRequest: NSFetchRequest<T> = {
+        
+        return configureFetchRequest()
+    }()
+    
     private lazy var frc: NSFetchedResultsController<T> = {
         
         return configureFetchedResultsController()
     }()
-    
+
     // MARK: Private Methods
     
-    private func configureFetchedResultsController() -> NSFetchedResultsController<T> {
+    // (Re)configures the Fetch Request
+    // Used by both fetch() and performFetch()
+    private func configureFetchRequest() -> NSFetchRequest<T> {
         
         let fetchRequest: NSFetchRequest<T> = T.fetchRequest() as! NSFetchRequest<T>
         fetchRequest.fetchBatchSize = 0
@@ -138,8 +159,14 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
             }
         }
         
+        return fetchRequest
+    }
+    
+    // (Re)configures the Fetched Results Controller
+    private func configureFetchedResultsController() -> NSFetchedResultsController<T> {
+        
         let frc = NSFetchedResultsController(
-            fetchRequest: fetchRequest,
+            fetchRequest: self.fetchRequest,
             managedObjectContext: CoreData.stack.context,
             sectionNameKeyPath: sectionNameKeyPath,
             cacheName: nil)
@@ -148,6 +175,7 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
         return frc
     }
     
+    // Performs the fetch when using the Fetched Results Controller
     private func performFetch() {
         
         do {
@@ -210,11 +238,15 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
     
     // MARK: Public Properties
     
+    // Used to supply Data to a ForEach List
+    // Must call loadDataSource() in View's .onAppear
     public var fetchedObjects: [T] {
         
         return frc.fetchedObjects ?? []
     }
     
+    // Used to supply Data to a ForEach List
+    // Don't call loadDataSource() in View's .onAppear - Array must not change
     public var allInOrder:[T] {
         
         self.performFetch()
@@ -223,24 +255,43 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
     
     // MARK: Public Methods
     
+    // Used to Performs the fetch when NOT using the Fetched Results Controller
+    // Fetches NSManagedObjects directly into an array
+    public func fetch() -> [T] {
+        
+        do {
+            let objects = try CoreData.stack.context.fetch(self.fetchRequest)
+            return objects
+        } catch let error as NSError {
+            print("Unresolved error \(error), \(error.userInfo)")
+            return [T]()
+        }
+    }
+    
+    // Usually called within the View's .onAppear block
     public func loadDataSource() {
         
         self.objectWillChange.send()
         self.performFetch()
     }
     
+    // Used to supply Data to a ForEach List
+    // Must call loadDataSource() in View's .onAppear
     public func allInOrderRelated(to: NSManagedObject) -> [T] {
         
         self.predicateObject = to
+        self.fetchRequest = configureFetchRequest()
         self.frc = configureFetchedResultsController()
         
         return self.allInOrder
     }
-    
+   
+    // Changes the primary Sort key and re-loads the data source
     public func changeSort(key: String, ascending: Bool) {
         
         self.sortKey1 = key
         self.sortAscending1 = ascending
+        self.fetchRequest = configureFetchRequest()
         self.frc = configureFetchedResultsController()
         
         self.loadDataSource()
@@ -248,11 +299,13 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
     
     // MARK: Support for List Editing
     
+    // default 'move' method for single-section Lists
     public func move(from source: IndexSet, to destination: Int) {
         
         self.reorder(from: source, to: destination, within: self.fetchedObjects)
     }
     
+    // 'delete' method for single-section Lists
     public func delete(from source: IndexSet) {
         
         CoreData.executeBlockAndCommit {
@@ -266,22 +319,27 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
     
     // MARK: Support for sectionNameKeyPath
     
+    // Used to supply Data to a ForEach List's outer loop
+    // No need to call loadDataSource() in View's .onAppear
     public var sections: [NSFetchedResultsSectionInfo] {
         
         self.performFetch()
         return self.frc.sections!
     }
     
+    // Used to supply Data to a ForEach List's inner loop
     public func objects(inSection: NSFetchedResultsSectionInfo) -> [T] {
         
         return inSection.objects as! [T]
     }
     
+    // 'move' method that adjusts for multi-section Lists
     public func move(from source: IndexSet, to destination: Int, inSection: NSFetchedResultsSectionInfo) {
         
         self.reorder(from: source, to: destination, within: self.objects(inSection: inSection))
     }
     
+    // 'delete' method that adjusts for multi-section Lists
     public func delete(from source: IndexSet, inSection: NSFetchedResultsSectionInfo) {
         
         CoreData.executeBlockAndCommit {

@@ -12,31 +12,31 @@ struct ItemFormView: View {
     
     @Binding var textName: String
     @Binding var textOrder: String
-
+    
     var body: some View {
         
-            Section(header: Text("Item".uppercased())) {
-                
-                VStack {
-                    HStack {
-                        Text("Name: ")
-                            .foregroundColor(.gray)
-                        Spacer()
-                    }
-                    TextField("Enter Item Name", text: self.$textName)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+        Section(header: Text("Item".uppercased())) {
+            
+            VStack {
+                HStack {
+                    Text("Name: ")
+                        .foregroundColor(.gray)
+                    Spacer()
                 }
-                
-                VStack {
-                    HStack {
-                        Text("Order: ")
-                            .foregroundColor(.gray)
-                        Spacer()
-                    }
-                    TextField("Enter Order", text: self.$textOrder)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                }
+                TextField("Enter Item Name", text: self.$textName)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
             }
+            
+            VStack {
+                HStack {
+                    Text("Order: ")
+                        .foregroundColor(.gray)
+                    Spacer()
+                }
+                TextField("Enter Order", text: self.$textOrder)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+            }
+        }
     }
 }
 
@@ -46,7 +46,9 @@ struct ItemFormView_Previews : PreviewProvider {
     static var previews: some View {
         
         NavigationView {
-            ItemFormView(textName: .constant("Item 0"), textOrder: .constant("0"))
+            Form {
+                ItemFormView(textName: .constant("Item 0"), textOrder: .constant("0"))
+            }
         }
     }
 }

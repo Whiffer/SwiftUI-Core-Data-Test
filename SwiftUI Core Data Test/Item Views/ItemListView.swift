@@ -11,11 +11,12 @@ import CoreData
 
 struct ItemListView : View {
     
-    @Environment(\.editMode) var editMode
-    
+//    @Environment(\.editMode) var editMode
+    // Beta 6: Using private state here because the editMode environment setter doesn't seem to work
+    @State private var editMode: EditMode = .inactive
+
     @ObservedObject var dataSource = CoreDataDataSource<Item>()
     
-    @State var myEditing: Bool = false
     @State var sortAscending: Bool = true
     
     var body: some View {
@@ -36,8 +37,7 @@ struct ItemListView : View {
                     
                     ForEach(dataSource.fetchedObjects) { item in
                         
-                        //TODO: can this be made into embeddable view?
-                        if self.myEditing {
+                        if self.editMode == .active {
                             ItemListCell(name: item.name, order: item.order)
                         } else {
                             NavigationLink(destination: ItemEditView(item: item)) {
@@ -54,9 +54,9 @@ struct ItemListView : View {
             .navigationBarItems(trailing:
                 HStack {
                     AddButton(destination: ItemAddView())
-                    EditSaveDoneButton(editAction: { self.myEditing = true },
+                    EditSaveDoneButton(editAction: { self.editMode = .active },
                                        saveAction: { },
-                                       doneAction: { self.myEditing = false },
+                                       doneAction: { self.editMode = .inactive },
                                        dirty: false )
                 }
             )

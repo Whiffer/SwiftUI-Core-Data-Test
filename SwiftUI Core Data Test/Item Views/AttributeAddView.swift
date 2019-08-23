@@ -19,7 +19,9 @@ struct AttributeAddView: View {
     
     var body: some View {
         
-        AttributeFormView(textName: self.$textName, textOrder: self.$textOrder)
+        Form {
+            AttributeFormView(textName: self.$textName, textOrder: self.$textOrder)
+        }
             .onAppear(perform: { self.onAppear() })
             .navigationBarTitle(Text("Add Attribute"), displayMode: .large)
             .navigationBarItems(leading: Button(action:{ self.cancelAction() }) { Text("Cancel") },
@@ -50,8 +52,12 @@ struct AttributeAddView: View {
     }
 }
 
+#if DEBUG
 struct AttributeAddView_Previews: PreviewProvider {
     static var previews: some View {
-        AttributeAddView(item: Item.allInOrder().first!)
+        NavigationView {
+            AttributeAddView(item: Item.allInOrder().first!)
+        }
     }
 }
+#endif

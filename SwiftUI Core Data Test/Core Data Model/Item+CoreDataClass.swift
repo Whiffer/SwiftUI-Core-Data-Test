@@ -17,12 +17,10 @@ public class Item: NSManagedObject, Identifiable {
     
     class func count() -> Int {
         
-        let context = CoreData.stack.context
-        
         let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
         
         do {
-            let count = try context.count(for: fetchRequest)
+            let count = try CoreData.stack.context.count(for: fetchRequest)
             return count
         } catch let error as NSError {
             fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -69,34 +67,27 @@ public class Item: NSManagedObject, Identifiable {
     
     class func allInOrder() -> [Item] {
         
-        let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
-        fetchRequest.fetchBatchSize = 0
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
-        fetchRequest.predicate = nil
+        let datasource = CoreDataDataSource<Item>()
+        return datasource.fetch()
+    }
+
+    #if DEBUG
+    class func preview() -> Item {
         
-        do {
-            let objects = try CoreData.stack.context.fetch(fetchRequest)
-            return objects
-        } catch let error as NSError {
-            print("Unresolved error \(error), \(error.userInfo)")
-            return [Item]()
+        let items = Item.allInOrder()
+        if items.count > 0 {
+            return items.first!
+        } else {
+            return Item.createItem(name: "Item Preview", order: 999)
         }
     }
+    #endif
     
     class func allSelectedItems() -> [Item] {
         
-        let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
-        fetchRequest.fetchBatchSize = 0
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
-        fetchRequest.predicate = NSPredicate(format:"selected = true")
-        
-        do {
-            let objects = try CoreData.stack.context.fetch(fetchRequest)
-            return objects
-        } catch let error as NSError {
-            print("Unresolved error \(error), \(error.userInfo)")
-            return [Item]()
-        }
+        let predicate = NSPredicate(format:"selected = true")
+        let datasource = CoreDataDataSource<Item>(predicate: predicate)
+        return datasource.fetch()
     }
     
     //MARK: CRUD
@@ -108,12 +99,12 @@ public class Item: NSManagedObject, Identifiable {
     
     class func createItem(name: String, order: Int?) -> Item {
         
-        let newItem = Item.newItem()
-        newItem.name = name
-        newItem.order = Int32(order ?? 0)
+        let item = Item.newItem()
+        item.name = name
+        item.order = Int32(order ?? 0)
         CoreData.stack.save()
         
-        return newItem
+        return item
     }
     
     public func update(name: String, order: String) {

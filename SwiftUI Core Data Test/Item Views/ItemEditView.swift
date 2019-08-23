@@ -10,9 +10,12 @@ import SwiftUI
 
 struct ItemEditView : View {
     
+//    @Environment(\.editMode) var editMode
+    // Beta 6: Using private state here because the editMode environment setter doesn't seem to work
+    @State private var editMode: EditMode = .inactive
+
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @Environment(\.editMode) var editMode
-    
+
     var item: Item
     
     @State var textName: String = ""
@@ -23,7 +26,9 @@ struct ItemEditView : View {
     var body: some View {
         
         Form {
+            
             ItemFormView(textName: self.$textName, textOrder: self.$textOrder)
+            
             Section(header: Text("Attributes".uppercased())) {
                 ForEach(dataSource.allInOrderRelated(to: item)) { attribute in
                     
@@ -40,9 +45,9 @@ struct ItemEditView : View {
         .navigationBarItems(trailing:
             HStack {
                 AddButton(destination: AttributeAddView(item: item))
-                EditSaveDoneButton(editAction: { },
+                EditSaveDoneButton(editAction: { self.editMode = .active },
                                    saveAction: { self.saveAction() },
-                                   doneAction: { },
+                                   doneAction: { self.editMode = .inactive },
                                    dirty: self.dirty() )
             }
         )
@@ -76,11 +81,9 @@ struct ItemEditView : View {
 
 #if DEBUG
 struct ItemEditView_Previews : PreviewProvider {
-    
     static var previews: some View {
-        
         NavigationView {
-            ItemEditView(item: Item.allInOrder().first!)
+            ItemEditView(item: Item.preview() )
         }
     }
 }

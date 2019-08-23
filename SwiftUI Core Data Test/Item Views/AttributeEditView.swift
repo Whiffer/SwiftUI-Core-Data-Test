@@ -10,9 +10,13 @@ import SwiftUI
 
 struct AttributeEditView: View {
     
+//    @Environment(\.editMode) var editMode
+    // Beta 6: Using private state here because the editMode environment setter doesn't seem to work
+    @State private var editMode: EditMode = .inactive
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @ObservedObject var attribute: Attribute
+    var attribute: Attribute
     
     @State var textName: String = ""
     @State var textOrder: String = ""
@@ -20,8 +24,7 @@ struct AttributeEditView: View {
     var body: some View {
         
         Form {
-            
-            ItemFormView(textName: self.$textName, textOrder: self.$textOrder)
+            AttributeFormView(textName: self.$textName, textOrder: self.$textOrder)
         }
         .onAppear(perform: { self.onAppear() })
         .navigationBarTitle(Text("Edit Attribute"), displayMode: .large)
@@ -55,8 +58,12 @@ struct AttributeEditView: View {
     }
 }
 
-//struct AttributeEditView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AttributeEditView(attribute: <#Attribute#>)
-//    }
-//}
+#if DEBUG
+struct AttributeEditView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            AttributeEditView(attribute: Attribute.preview() )
+        }
+    }
+}
+#endif

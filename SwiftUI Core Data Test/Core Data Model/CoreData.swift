@@ -55,7 +55,7 @@ class CoreData: NSObject {
             for i in 0...4 {
                 let item = Item.createItem(name: "Item \(i)", order: i)
                 for j in 0...4 {
-                    Attribute.createAttributeFor(item: item, name: "Attribute \(i).\(j)", order: j)
+                    _ = Attribute.createAttributeFor(item: item, name: "Attribute \(i).\(j)", order: j)
                 }
             }
         }
