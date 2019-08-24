@@ -114,7 +114,7 @@ public class Item: NSManagedObject, Identifiable {
         CoreData.stack.save()
     }
     
-    public func update(selected: Bool) {
+    public func update(selected: Bool, commit: Bool) {
         
         self.selected = selected
         CoreData.stack.save()

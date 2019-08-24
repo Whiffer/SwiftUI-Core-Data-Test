@@ -38,13 +38,14 @@ struct ItemListView : View {
                     ForEach(dataSource.fetchedObjects) { item in
                         
                         NavigationLinkWithEdit(destination: ItemEditView(item: item),
-                                               cell: ItemListCell(name: item.name, order: item.order),
+                                               cell: ItemListCell(name: item.name, order: item.order, selected: false),
                                                editMode: self.editMode)
                     }
                         .onMove(perform: (self.sortAscending ? self.dataSource.move : nil))    // Move only allowed if ascending sort
                         .onDelete(perform: self.dataSource.delete)
                 }
             }
+            .onAppear(perform: { self.onAppear() })
             .listStyle(GroupedListStyle())
             .navigationBarTitle(Text("Items"), displayMode: .large)
             .navigationBarItems(trailing:
@@ -56,13 +57,13 @@ struct ItemListView : View {
                                        dirty: false )
                 }
             )
-                .onAppear(perform: { self.onAppear() })
-        }
+         }
     }
     
     public func onAppear() {
         
         self.dataSource.loadDataSource()
+        self.editMode = .inactive
     }
     
     public func onToggleSort() {

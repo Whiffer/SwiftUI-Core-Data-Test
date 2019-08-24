@@ -21,24 +21,43 @@ struct ItemSelectionView : View {
     var body: some View {
         
         NavigationView {
-            List() {
-                
-                Section(header: Text("All Items ".uppercased()) )
-                {
-                    ForEach(dataSource.fetchedObjects) { item in
-                        
-                        if self.editMode == .inactive {
-                            ItemListCell(name: item.name, order: item.order)
-                        } else {
-                            Toggle(isOn: self.$selection[item]) { ItemListCell(name: item.name, order: item.order) }
-                                .toggleStyle(CheckmarkToggleStyle())
-                            //                                .toggleStyle(AddDeleteToggleStyle())
-                            //                                .toggleStyle(DefaultToggleStyle())
+            VStack {
+                List() {
+                    
+                    Section(header: Text("All Items ".uppercased()) )
+                    {
+                        ForEach(self.dataSource.fetchedObjects) { item in
+                            
+                            ToggleWithEdit(isOn: self.$selection[item],
+                                           cell: ItemListCell(name: item.name, order: item.order, selected: item.selected),
+                                           style: CheckmarkToggleStyle(),
+//                                           style: AddDeleteToggleStyle(),
+//                                           style: DefaultToggleStyle(),
+                                           editMode: self.editMode)
                         }
                     }
                 }
+                .listStyle(GroupedListStyle())
+                
+                if self.editMode == .active {
+                    HStack {
+                        Button(action: { self.onSelectAllButton() } )
+                        { Text("Select All") }
+                            .disabled(self.selection.selection.count == self.dataSource.fetchedObjects.count)
+                        Spacer()
+                        Button(action: { self.onDeselectAllButton() } )
+                        { Text("Deselect All") }
+                            .disabled(self.selection.selection.count == 0)
+                        Spacer()
+                        Button(action: { self.onDeleteSelectedButton() } )
+                        { Text("Delete Selected") }
+                            .disabled(self.selection.selection.count == 0)
+                    }
+                    .padding(5)
+                    .padding([.bottom])
+                }
             }
-            .listStyle(GroupedListStyle())
+            .onAppear(perform: { self.onAppear() })
             .navigationBarTitle(Text("Select Items"), displayMode: .large)
             .navigationBarItems(trailing:
                 HStack {
@@ -48,7 +67,6 @@ struct ItemSelectionView : View {
                                        dirty: false )
                 }
             )
-                .onAppear(perform: { self.onAppear() })
         }
     }
     
@@ -56,6 +74,42 @@ struct ItemSelectionView : View {
         
         self.dataSource.loadDataSource()
         self.selection.selection = Set<Item>(Item.allSelectedItems())
+        
+        self.editMode = .inactive
+    }
+    
+    public func onSelectAllButton() {
+        
+        CoreData.executeBlockAndCommit {
+            for item in self.dataSource.fetchedObjects {
+                if !item.selected {
+                    item.update(selected: true, commit: false)
+                }
+            }
+        }
+        self.selection.selection = Set<Item>(Item.allInOrder())
+    }
+    
+    public func onDeselectAllButton() {
+        
+        CoreData.executeBlockAndCommit {
+            for item in self.dataSource.fetchedObjects {
+                if item.selected {
+                    item.update(selected: false, commit: false)
+                }
+            }
+        }
+        self.selection.selection = Set<Item>()
+    }
+    
+    public func onDeleteSelectedButton() {
+        
+        CoreData.executeBlockAndCommit {
+            for item in self.selection.selection {
+                item.delete()
+            }
+        }
+        self.selection.selection = Set<Item>()
     }
     
 }

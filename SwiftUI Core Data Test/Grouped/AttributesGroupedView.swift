@@ -39,6 +39,7 @@ struct AttributesGroupedView: View {
                     }
                 }
             }
+            .onAppear(perform: { self.onAppear() })
             .listStyle(GroupedListStyle())
             .navigationBarTitle(Text("All Attributes"), displayMode: .large)
             .navigationBarItems(trailing:
@@ -48,6 +49,11 @@ struct AttributesGroupedView: View {
                                    dirty: false )
             )
         }
+    }
+    
+    public func onAppear() {
+        
+        self.editMode = .inactive
     }
 }
 

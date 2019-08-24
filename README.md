@@ -27,8 +27,16 @@ Tab 4: Demonstrates Selecting rows within a List
 It uses a generic ListSelectionManager to allow specific actions (e.g. updating database) 
 at the time on the selection or deselection, in addition to inserting and deleting from the selection Set.
 It also demonstrates how to create a custom ToggleStyle to use instead of the Default Switch ToggleStyle.
+Selecting Items is allowed in Edit mode, which also exposes several commands when active.
 
 =======================
 
 This project is still a work in progress.  Several more changes will be made in the near future.
+
+KNOWN ISSUES:
+
+1.  Start the App and then Select the Side by Side tab, tap Edit in either of the two views. 
+Selecting any other tab view causes a crash somewhere in the SwiftUI framework.
+
+
 
