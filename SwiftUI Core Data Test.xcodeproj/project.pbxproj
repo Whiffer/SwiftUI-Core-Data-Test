@@ -23,12 +23,15 @@
 		13B2A8FF230BA12100054945 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B2A8FB230BA12100054945 /* Item+CoreDataProperties.swift */; };
 		13B2A900230BA12100054945 /* Attribute+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B2A8FC230BA12100054945 /* Attribute+CoreDataClass.swift */; };
 		13B2A901230BA12100054945 /* Attribute+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B2A8FD230BA12100054945 /* Attribute+CoreDataProperties.swift */; };
-		13BB3F88230EEB7300F1CA35 /* EditNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB3F87230EEB7200F1CA35 /* EditNavigationLink.swift */; };
+		13BB3F88230EEB7300F1CA35 /* NavigationLinkWithEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB3F87230EEB7200F1CA35 /* NavigationLinkWithEdit.swift */; };
 		13BB3F8B230F028E00F1CA35 /* ItemSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB3F8A230F028E00F1CA35 /* ItemSelectionView.swift */; };
 		13BB3F90230F103800F1CA35 /* AddDeleteToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB3F8D230F103800F1CA35 /* AddDeleteToggleStyle.swift */; };
 		13BB3F91230F103800F1CA35 /* ListSelectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB3F8E230F103800F1CA35 /* ListSelectionManager.swift */; };
 		13BB3F95230F12D000F1CA35 /* ItemSelectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB3F93230F12D000F1CA35 /* ItemSelectionManager.swift */; };
 		13BB3F96230F12D000F1CA35 /* CheckmarkToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB3F94230F12D000F1CA35 /* CheckmarkToggleStyle.swift */; };
+		13BB3F9A2310705C00F1CA35 /* AttributeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB3F992310705C00F1CA35 /* AttributeListCell.swift */; };
+		13BB3F9C2310B09300F1CA35 /* UserEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB3F9B2310B09300F1CA35 /* UserEnvironment.swift */; };
+		13BB3F9E2310F69900F1CA35 /* ToggleWithEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB3F9D2310F69800F1CA35 /* ToggleWithEdit.swift */; };
 		13CD74F2230C82FF00833465 /* AttributesGroupedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CD74F1230C82FF00833465 /* AttributesGroupedView.swift */; };
 		13CD74F4230CBC4200833465 /* AttributeAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CD74F3230CBC4200833465 /* AttributeAddView.swift */; };
 		13CD74F6230CBCF300833465 /* AttributeFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CD74F5230CBCF300833465 /* AttributeFormView.swift */; };
@@ -60,12 +63,15 @@
 		13B2A8FB230BA12100054945 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		13B2A8FC230BA12100054945 /* Attribute+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attribute+CoreDataClass.swift"; sourceTree = "<group>"; };
 		13B2A8FD230BA12100054945 /* Attribute+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attribute+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		13BB3F87230EEB7200F1CA35 /* EditNavigationLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditNavigationLink.swift; sourceTree = "<group>"; };
+		13BB3F87230EEB7200F1CA35 /* NavigationLinkWithEdit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationLinkWithEdit.swift; sourceTree = "<group>"; };
 		13BB3F8A230F028E00F1CA35 /* ItemSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemSelectionView.swift; sourceTree = "<group>"; };
 		13BB3F8D230F103800F1CA35 /* AddDeleteToggleStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDeleteToggleStyle.swift; sourceTree = "<group>"; };
 		13BB3F8E230F103800F1CA35 /* ListSelectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListSelectionManager.swift; sourceTree = "<group>"; };
 		13BB3F93230F12D000F1CA35 /* ItemSelectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemSelectionManager.swift; sourceTree = "<group>"; };
 		13BB3F94230F12D000F1CA35 /* CheckmarkToggleStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckmarkToggleStyle.swift; sourceTree = "<group>"; };
+		13BB3F992310705C00F1CA35 /* AttributeListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributeListCell.swift; sourceTree = "<group>"; };
+		13BB3F9B2310B09300F1CA35 /* UserEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEnvironment.swift; sourceTree = "<group>"; };
+		13BB3F9D2310F69800F1CA35 /* ToggleWithEdit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleWithEdit.swift; sourceTree = "<group>"; };
 		13CD74F1230C82FF00833465 /* AttributesGroupedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesGroupedView.swift; sourceTree = "<group>"; };
 		13CD74F3230CBC4200833465 /* AttributeAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeAddView.swift; sourceTree = "<group>"; };
 		13CD74F5230CBCF300833465 /* AttributeFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeFormView.swift; sourceTree = "<group>"; };
@@ -162,6 +168,7 @@
 				13E0535922CFB6BB008664A4 /* ItemAddView.swift */,
 				139015FC22C2E1A800EA7B48 /* ItemEditView.swift */,
 				13752AE322F8DE1900F131BF /* ItemFormView.swift */,
+				13BB3F992310705C00F1CA35 /* AttributeListCell.swift */,
 				13CD74F3230CBC4200833465 /* AttributeAddView.swift */,
 				13CD74F7230CC1A100833465 /* AttributeEditView.swift */,
 				13CD74F5230CBCF300833465 /* AttributeFormView.swift */,
@@ -183,7 +190,9 @@
 			children = (
 				13CFEE8E230B4949002EFF1A /* AddButton.swift */,
 				13F9297A230E195100CB4392 /* EditSaveDoneButton.swift */,
-				13BB3F87230EEB7200F1CA35 /* EditNavigationLink.swift */,
+				13BB3F87230EEB7200F1CA35 /* NavigationLinkWithEdit.swift */,
+				13BB3F9D2310F69800F1CA35 /* ToggleWithEdit.swift */,
+				13BB3F9B2310B09300F1CA35 /* UserEnvironment.swift */,
 			);
 			path = "Helper Views";
 			sourceTree = "<group>";
@@ -290,11 +299,14 @@
 			files = (
 				13B2A8FE230BA12100054945 /* Item+CoreDataClass.swift in Sources */,
 				13CFEE91230B4949002EFF1A /* ItemListCell.swift in Sources */,
+				13BB3F9A2310705C00F1CA35 /* AttributeListCell.swift in Sources */,
 				13B2A901230BA12100054945 /* Attribute+CoreDataProperties.swift in Sources */,
 				13B2A8FF230BA12100054945 /* Item+CoreDataProperties.swift in Sources */,
 				13BB3F8B230F028E00F1CA35 /* ItemSelectionView.swift in Sources */,
 				13BB3F95230F12D000F1CA35 /* ItemSelectionManager.swift in Sources */,
+				13BB3F9E2310F69900F1CA35 /* ToggleWithEdit.swift in Sources */,
 				139015FD22C2E1A800EA7B48 /* ItemEditView.swift in Sources */,
+				13BB3F9C2310B09300F1CA35 /* UserEnvironment.swift in Sources */,
 				139CD88222C2A4D500E99642 /* SwiftUI_Core_Data_Test.xcdatamodeld in Sources */,
 				1390164722C312B200EA7B48 /* CoreData.swift in Sources */,
 				13E0535A22CFB6BB008664A4 /* ItemAddView.swift in Sources */,
@@ -305,7 +317,7 @@
 				139CD87D22C2A4D500E99642 /* AppDelegate.swift in Sources */,
 				13B2A900230BA12100054945 /* Attribute+CoreDataClass.swift in Sources */,
 				13CD74F2230C82FF00833465 /* AttributesGroupedView.swift in Sources */,
-				13BB3F88230EEB7300F1CA35 /* EditNavigationLink.swift in Sources */,
+				13BB3F88230EEB7300F1CA35 /* NavigationLinkWithEdit.swift in Sources */,
 				139CD88422C2A4D500E99642 /* ContentView.swift in Sources */,
 				13F166AB2300732B00F4DBA0 /* CoreDataDataSource.swift in Sources */,
 				139CD87F22C2A4D500E99642 /* SceneDelegate.swift in Sources */,

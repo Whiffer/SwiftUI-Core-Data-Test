@@ -11,13 +11,13 @@ import CoreData
 
 struct ItemSelectionView : View {
     
+    //TODO:  Beta 6 - Using private @State here because the Environment editMode setter doesn't seem to work as expected
+    //    @Environment(\.editMode) var editMode: Binding<EditMode>?
+    @State private var editMode: EditMode = .inactive
+
     @ObservedObject var dataSource = CoreDataDataSource<Item>()
     @ObservedObject var selection: ItemSelectionManager = ItemSelectionManager()
 
-//    @Environment(\.editMode) var editMode
-    // Beta 6: Using private state here because the editMode environment setter doesn't seem to work
-    @State private var editMode: EditMode = .inactive
-    
     var body: some View {
         
         NavigationView {
@@ -27,13 +27,13 @@ struct ItemSelectionView : View {
                 {
                     ForEach(dataSource.fetchedObjects) { item in
                         
-                        if self.editMode == .active {
+                        if self.editMode == .inactive {
+                            ItemListCell(name: item.name, order: item.order)
+                        } else {
                             Toggle(isOn: self.$selection[item]) { ItemListCell(name: item.name, order: item.order) }
                                 .toggleStyle(CheckmarkToggleStyle())
-//                                .toggleStyle(AddDeleteToggleStyle())
-//                                .toggleStyle(DefaultToggleStyle())
-                        } else {
-                            ItemListCell(name: item.name, order: item.order)
+                            //                                .toggleStyle(AddDeleteToggleStyle())
+                            //                                .toggleStyle(DefaultToggleStyle())
                         }
                     }
                 }

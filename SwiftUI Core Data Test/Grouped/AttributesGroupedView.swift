@@ -11,14 +11,14 @@ import CoreData
 
 struct AttributesGroupedView: View {
     
+    //TODO:  Beta 6 - Using private @State here because the Environment editMode setter doesn't seem to work as expected
+    //    @Environment(\.editMode) var editMode: Binding<EditMode>?
+    @State private var editMode: EditMode = .inactive
+
     @ObservedObject var dataSource = CoreDataDataSource<Attribute>(sortKey1: "item.order",
                                                                    sortKey2: "order",
                                                                    sectionNameKeyPath: "item.name")
     
-//    @Environment(\.editMode) var editMode
-    // Beta 6: Using private state here because the editMode environment setter doesn't seem to work
-    @State private var editMode: EditMode = .inactive
-
     var body: some View {
         
         NavigationView {
@@ -30,13 +30,9 @@ struct AttributesGroupedView: View {
                     {
                         ForEach(self.dataSource.objects(inSection: section)) { attribute in
                             
-                            if self.editMode == .active {
-                                ItemListCell(name: attribute.name, order: attribute.order)
-                            } else {
-                                NavigationLink(destination: AttributeEditView(attribute: attribute)) {
-                                    ItemListCell(name: attribute.name, order: attribute.order)
-                                }
-                            }
+                            NavigationLinkWithEdit(destination: AttributeEditView(attribute: attribute),
+                                                   cell: AttributeListCell(name: attribute.name, order: attribute.order),
+                                                   editMode: self.editMode)
                         }
                         .onMove { self.dataSource.move(from: $0, to: $1, inSection: section ) }
                         .onDelete { self.dataSource.delete(from: $0, inSection: section) }

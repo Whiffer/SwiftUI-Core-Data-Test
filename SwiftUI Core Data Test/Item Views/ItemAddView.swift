@@ -26,7 +26,9 @@ struct ItemAddView : View {
         
         Form {
             
-            ItemFormView(textName: self.$textName, textOrder: self.$textOrder)
+            ItemFormView(textName: self.$textName,
+                         textOrder: self.$textOrder,
+                         editMode: .active)
         }
         .onAppear(perform: { self.onAppear() })
         .navigationBarTitle(Text("Add Item"), displayMode: .large)

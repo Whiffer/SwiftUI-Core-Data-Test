@@ -9,32 +9,48 @@
 import SwiftUI
 
 struct ItemFormView: View {
-    
+
+    //TODO:  Beta 6 - Using private @State here because the Environment editMode setter doesn't seem to work as expected
+    //    @Environment(\.editMode) var editMode: Binding<EditMode>?
+
     @Binding var textName: String
     @Binding var textOrder: String
-    
+    var editMode: EditMode
+
     var body: some View {
         
         Section(header: Text("Item".uppercased())) {
             
             VStack {
                 HStack {
-                    Text("Name: ")
-                        .foregroundColor(.gray)
+                    Text("Name: ").foregroundColor(.gray)
                     Spacer()
                 }
-                TextField("Enter Item Name", text: self.$textName)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                if self.editMode == .active {
+                    TextField("Enter Item Name", text: self.$textName)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                } else {
+                    HStack {
+                        Text(self.textName)
+                        Spacer()
+                    }
+                }
             }
             
             VStack {
                 HStack {
-                    Text("Order: ")
-                        .foregroundColor(.gray)
+                    Text("Order: ").foregroundColor(.gray)
                     Spacer()
                 }
-                TextField("Enter Order", text: self.$textOrder)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                if self.editMode == .active {
+                    TextField("Enter Order", text: self.$textOrder)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                } else {
+                    HStack {
+                        Text(self.textOrder)
+                        Spacer()
+                    }
+                }
             }
         }
     }
@@ -47,7 +63,9 @@ struct ItemFormView_Previews : PreviewProvider {
         
         NavigationView {
             Form {
-                ItemFormView(textName: .constant("Item 0"), textOrder: .constant("0"))
+                ItemFormView(textName: .constant("Item 0"),
+                             textOrder: .constant("0"),
+                             editMode: .active)
             }
         }
     }

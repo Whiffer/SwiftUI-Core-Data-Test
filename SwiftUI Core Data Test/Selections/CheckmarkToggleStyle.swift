@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct CheckmarkToggleStyle: ToggleStyle {
+    
     public func makeBody(configuration: AddDeleteToggleStyle.Configuration) -> some View {
         HStack {
             if configuration.isOn {

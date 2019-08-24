@@ -10,8 +10,8 @@ import SwiftUI
 
 struct ItemEditView : View {
     
-//    @Environment(\.editMode) var editMode
-    // Beta 6: Using private state here because the editMode environment setter doesn't seem to work
+    //TODO:  Beta 6 - Using private @State here because the Environment editMode setter doesn't seem to work as expected
+    //    @Environment(\.editMode) var editMode: Binding<EditMode>?
     @State private var editMode: EditMode = .inactive
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -27,21 +27,24 @@ struct ItemEditView : View {
         
         Form {
             
-            ItemFormView(textName: self.$textName, textOrder: self.$textOrder)
-            
+            ItemFormView(textName: self.$textName,
+                         textOrder: self.$textOrder,
+                         editMode: self.editMode)
+             
             Section(header: Text("Attributes".uppercased())) {
-                ForEach(dataSource.allInOrderRelated(to: item)) { attribute in
+                ForEach(dataSource.loadDataSource(relatedTo: item)) { attribute in
                     
-                    NavigationLink(destination: AttributeEditView(attribute: attribute)) {
-                        ItemListCell(name: attribute.name, order: attribute.order)
-                    }
+                    NavigationLinkWithEdit(destination: AttributeEditView(attribute: attribute),
+                                           cell: AttributeListCell(name: attribute.name, order: attribute.order),
+                                           editMode: self.editMode)
                 }
                 .onMove(perform: self.dataSource.move)
                 .onDelete(perform: self.dataSource.delete)
             }
         }
         .onAppear(perform: { self.onAppear() })
-        .navigationBarTitle(Text("Edit Item"), displayMode: .large)
+        .navigationBarTitle(Text("\(self.editMode == .active ? "Edit" : "View") Item Details"),
+                            displayMode: .large)
         .navigationBarItems(trailing:
             HStack {
                 AddButton(destination: AttributeAddView(item: item))

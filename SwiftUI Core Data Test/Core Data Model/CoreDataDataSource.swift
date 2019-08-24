@@ -255,8 +255,8 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
     
     // MARK: Public Methods
     
-    // Used to Performs the fetch when NOT using the Fetched Results Controller
-    // Fetches NSManagedObjects directly into an array
+    // Used to Perform a fetch when NOT using the Fetched Results Controller
+    // Fetches all NSManagedObjects directly into an array
     public func fetch() -> [T] {
         
         do {
@@ -276,10 +276,9 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
     }
     
     // Used to supply Data to a ForEach List
-    // Must call loadDataSource() in View's .onAppear
-    public func allInOrderRelated(to: NSManagedObject) -> [T] {
+    public func loadDataSource(relatedTo: NSManagedObject) -> [T] {
         
-        self.predicateObject = to
+        self.predicateObject = relatedTo
         self.fetchRequest = configureFetchRequest()
         self.frc = configureFetchedResultsController()
         
@@ -352,7 +351,7 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
     
     // MARK: CoreDataDataSource + NSFetchedResultsControllerDelegate
     
-    public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    public func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
         self.objectWillChange.send()
     }
