@@ -37,8 +37,3 @@ KNOWN ISSUES:
 
 1.  Start the App and then Select the Side by Side tab, tap Edit in either of the two views. 
 Selecting any other tab view causes a crash somewhere in the SwiftUI framework.
-
-
-
-
-
