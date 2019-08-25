@@ -40,7 +40,7 @@ struct NavigationLinkWithEdit_Previews: PreviewProvider {
         NavigationView {
             List {
                 NavigationLinkWithEdit(destination: ItemEditView(item: Item.preview()),
-                                       cell: ItemListCell(name: "Item 0", order: 0, selected: false),
+                                       cell: ItemListCell(name: "Item 0", order: 0, check: false),
                                        editMode: .inactive)
             }
         }

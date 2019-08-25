@@ -12,7 +12,7 @@ struct ItemListCell: View {
     
     var name: String
     var order: Int32
-    var selected: Bool
+    var check: Bool
     
     var body: some View {
         HStack {
@@ -29,7 +29,7 @@ struct ItemListCell: View {
                     Spacer()
                 }
             }
-            if self.selected {
+            if self.check {
                 Image(systemName: "checkmark")
             }
         }
@@ -39,7 +39,7 @@ struct ItemListCell: View {
 #if DEBUG
 struct ItemListCell_Previews: PreviewProvider {
     static var previews: some View {
-        ItemListCell(name: "Item 0", order: 0, selected: false)
+        ItemListCell(name: "Item 0", order: 0, check: false)
     }
 }
 #endif

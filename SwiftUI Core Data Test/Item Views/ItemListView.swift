@@ -38,7 +38,7 @@ struct ItemListView : View {
                     ForEach(dataSource.fetchedObjects) { item in
                         
                         NavigationLinkWithEdit(destination: ItemEditView(item: item),
-                                               cell: ItemListCell(name: item.name, order: item.order, selected: false),
+                                               cell: ItemListCell(name: item.name, order: item.order, check: item.selected),
                                                editMode: self.editMode)
                     }
                         .onMove(perform: (self.sortAscending ? self.dataSource.move : nil))    // Move only allowed if ascending sort

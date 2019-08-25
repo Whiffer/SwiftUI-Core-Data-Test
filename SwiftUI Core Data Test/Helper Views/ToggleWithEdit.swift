@@ -41,7 +41,7 @@ struct ToggleWithEdit_Previews: PreviewProvider {
         NavigationView {
             List {
                 ToggleWithEdit(isOn: .constant(true),
-                               cell: ItemListCell(name: "Item 0", order: 0, selected: false),
+                               cell: ItemListCell(name: "Item 0", order: 0, check: false),
                                style: DefaultToggleStyle(),
                                editMode: .active)
             }

@@ -29,11 +29,13 @@ struct ItemSelectionView : View {
                         ForEach(self.dataSource.fetchedObjects) { item in
                             
                             ToggleWithEdit(isOn: self.$selection[item],
-                                           cell: ItemListCell(name: item.name, order: item.order, selected: item.selected),
+                                           cell: ItemListCell(name: item.name, order: item.order, check: false),
                                            style: CheckmarkToggleStyle(),
 //                                           style: AddDeleteToggleStyle(),
 //                                           style: DefaultToggleStyle(),
                                            editMode: self.editMode)
+                                .listRowBackground(item.selected ? Color(red: 0.85, green: 0.85, blue: 0.85) : Color.clear)
+
                         }
                     }
                 }
