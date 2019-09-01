@@ -40,7 +40,8 @@ https://stackoverflow.com/questions/57496453/swiftui-how-do-i-make-edit-rows-in-
 
 KNOWN ISSUES:
 
-1.  (No longer an issue in Beta 7).  Start the App and then Select the Side by Side tab, tap Edit in either of the two views. 
+1.  Start the App and then Select the Side by Side tab, tap Edit in either of the two views. 
 Selecting any other tab view causes a crash somewhere in the SwiftUI framework. 
+(No longer an issue in Beta 7). 
 
 This project is still a work in progress.  Several more changes will be made in the near future.
