@@ -353,7 +353,33 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
     
     public func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
+        print("In controllerWillChangeContent()")
         self.objectWillChange.send()
+    }
+        
+    public func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        let object = anObject as! NSManagedObject
+        let name = object.value(forKey: "name")
+        
+        var changeType: String
+        
+        switch type {
+        case .insert:
+            changeType = "inserted"
+        case .delete:
+            changeType = "deleted"
+        case .move:
+            changeType = "moved"
+        case .update:
+            changeType = "updated"
+        default:
+            changeType = "unknown"
+        }
+        
+        print("Controller \(changeType): \(name!)")
+//        self.objectWillChange.send()
+//        object.objectWillChange.send()
     }
     
 }

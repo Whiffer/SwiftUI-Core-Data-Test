@@ -11,8 +11,6 @@ import CoreData
 
 struct ItemSelectionView : View {
     
-    //TODO:  Beta 6 - Using private @State here because the Environment editMode setter doesn't seem to work as expected
-    //    @Environment(\.editMode) var editMode: Binding<EditMode>?
     @State private var editMode: EditMode = .inactive
 
     @ObservedObject var dataSource = CoreDataDataSource<Item>()
@@ -28,14 +26,18 @@ struct ItemSelectionView : View {
                     {
                         ForEach(self.dataSource.fetchedObjects) { item in
                             
-                            ToggleWithEdit(isOn: self.$selection[item],
-                                           cell: ItemListCell(name: item.name, order: item.order, check: false),
-                                           style: CheckmarkToggleStyle(),
-//                                           style: AddDeleteToggleStyle(),
-//                                           style: DefaultToggleStyle(),
-                                           editMode: self.editMode)
-                                .listRowBackground(item.selected ? Color(red: 0.85, green: 0.85, blue: 0.85) : Color.clear)
-
+                            HStack {
+                                if self.editMode == .active {
+                                    Toggle(isOn: self.$selection[item])
+                                    { ItemListCell(name: item.name, order: item.order, check: false) }
+                                        .toggleStyle(CheckmarkToggleStyle())
+//                                        .toggleStyle(AddDeleteToggleStyle())
+//                                        .toggleStyle(DefaultToggleStyle())
+                                } else {
+                                    ItemListCell(name: item.name, order: item.order, check: false)
+                                }
+                            }
+                            .listRowBackground(item.selected ? Color(UIColor.systemGroupedBackground) : Color.clear)
                         }
                     }
                 }
@@ -61,13 +63,8 @@ struct ItemSelectionView : View {
             }
             .onAppear(perform: { self.onAppear() })
             .navigationBarTitle(Text("Select Items"), displayMode: .large)
-            .navigationBarItems(trailing:
-                HStack {
-                    EditSaveDoneButton(editAction: { self.editMode = .active },
-                                       saveAction: { },
-                                       doneAction: { self.editMode = .inactive },
-                                       dirty: false )
-                }
+            .navigationBarItems(trailing: EditButton()
+            .environment(\.editMode, self.$editMode)
             )
         }
     }
@@ -76,8 +73,6 @@ struct ItemSelectionView : View {
         
         self.dataSource.loadDataSource()
         self.selection.selection = Set<Item>(Item.allSelectedItems())
-        
-        self.editMode = .inactive
     }
     
     public func onSelectAllButton() {

@@ -10,10 +10,6 @@ import SwiftUI
 
 struct AttributeEditView: View {
     
-    //TODO:  Beta 6 - Using private @State here because the Environment editMode setter doesn't seem to work as expected
-    //    @Environment(\.editMode) var editMode: Binding<EditMode>?
-    @State private var editMode: EditMode = .inactive
-
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var attribute: Attribute

@@ -11,5 +11,4 @@ import SwiftUI
 
 class UserEnvironment: ObservableObject {
     
-//    @Published var editMode: EditMode = .inactive
 }

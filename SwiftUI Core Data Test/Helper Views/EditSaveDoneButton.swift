@@ -10,7 +10,6 @@ import SwiftUI
 
 struct EditSaveDoneButton : View {
     
-    // Beta 6: This is currently unused because the environments editMode setter doesn't seem to work as expected
     @Environment(\.editMode) var editMode
     
     var editAction: () -> Void

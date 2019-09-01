@@ -10,8 +10,6 @@ import SwiftUI
 
 struct ItemEditView : View {
     
-    //TODO:  Beta 6 - Using private @State here because the Environment editMode setter doesn't seem to work as expected
-    //    @Environment(\.editMode) var editMode: Binding<EditMode>?
     @State private var editMode: EditMode = .inactive
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -29,14 +27,17 @@ struct ItemEditView : View {
             
             ItemFormView(textName: self.$textName,
                          textOrder: self.$textOrder,
-                         editMode: self.editMode)
+                         editMode: self.$editMode)
              
             Section(header: Text("Attributes".uppercased())) {
                 ForEach(dataSource.loadDataSource(relatedTo: item)) { attribute in
                     
-                    NavigationLinkWithEdit(destination: AttributeEditView(attribute: attribute),
-                                           cell: AttributeListCell(name: attribute.name, order: attribute.order),
-                                           editMode: self.editMode)
+                    if self.editMode == .active {
+                        AttributeListCell(name: attribute.name, order: attribute.order)
+                    } else {
+                        NavigationLink(destination: AttributeEditView(attribute: attribute))
+                        { AttributeListCell(name: attribute.name, order: attribute.order) }
+                    }
                 }
                 .onMove(perform: self.dataSource.move)
                 .onDelete(perform: self.dataSource.delete)
@@ -54,6 +55,7 @@ struct ItemEditView : View {
                                    dirty: self.dirty() )
             }
         )
+        .environment(\.editMode, self.$editMode)
     }
     
     func onAppear() {

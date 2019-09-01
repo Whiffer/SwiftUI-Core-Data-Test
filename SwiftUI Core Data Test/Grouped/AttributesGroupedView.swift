@@ -11,8 +11,6 @@ import CoreData
 
 struct AttributesGroupedView: View {
     
-    //TODO:  Beta 6 - Using private @State here because the Environment editMode setter doesn't seem to work as expected
-    //    @Environment(\.editMode) var editMode: Binding<EditMode>?
     @State private var editMode: EditMode = .inactive
 
     @ObservedObject var dataSource = CoreDataDataSource<Attribute>(sortKey1: "item.order",
@@ -30,9 +28,12 @@ struct AttributesGroupedView: View {
                     {
                         ForEach(self.dataSource.objects(inSection: section)) { attribute in
                             
-                            NavigationLinkWithEdit(destination: AttributeEditView(attribute: attribute),
-                                                   cell: AttributeListCell(name: attribute.name, order: attribute.order),
-                                                   editMode: self.editMode)
+                            if self.editMode == .active {
+                                AttributeListCell(name: attribute.name, order: attribute.order)
+                            } else {
+                                NavigationLink(destination: AttributeEditView(attribute: attribute))
+                                { AttributeListCell(name: attribute.name, order: attribute.order) }
+                            }
                         }
                         .onMove { self.dataSource.move(from: $0, to: $1, inSection: section ) }
                         .onDelete { self.dataSource.delete(from: $0, inSection: section) }
@@ -42,18 +43,13 @@ struct AttributesGroupedView: View {
             .onAppear(perform: { self.onAppear() })
             .listStyle(GroupedListStyle())
             .navigationBarTitle(Text("All Attributes"), displayMode: .large)
-            .navigationBarItems(trailing:
-                EditSaveDoneButton(editAction: { self.editMode = .active },
-                                   saveAction: { },
-                                   doneAction: { self.editMode = .inactive },
-                                   dirty: false )
-            )
+            .navigationBarItems(trailing: EditButton() )
+            .environment(\.editMode, self.$editMode)
         }
     }
     
     public func onAppear() {
         
-        self.editMode = .inactive
     }
 }
 

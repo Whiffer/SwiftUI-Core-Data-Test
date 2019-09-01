@@ -39,6 +39,7 @@ class CoreData: NSObject {
         if self.context.hasChanges {
             do {
                 try self.context.save()
+                print("In CoreData.stack.save()")
             } catch {
                 
                 let nserror = error as NSError

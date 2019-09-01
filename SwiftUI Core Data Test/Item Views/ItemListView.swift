@@ -11,8 +11,6 @@ import CoreData
 
 struct ItemListView : View {
     
-    //TODO:  Beta 6 - Using private @State here because the Environment editMode setter doesn't seem to work as expected
-    //    @Environment(\.editMode) var editMode: Binding<EditMode>?
     @State private var editMode: EditMode = .inactive
 
     @ObservedObject var dataSource = CoreDataDataSource<Item>()
@@ -37,9 +35,12 @@ struct ItemListView : View {
                     
                     ForEach(dataSource.fetchedObjects) { item in
                         
-                        NavigationLinkWithEdit(destination: ItemEditView(item: item),
-                                               cell: ItemListCell(name: item.name, order: item.order, check: item.selected),
-                                               editMode: self.editMode)
+                        if self.editMode == .active {
+                            ItemListCell(name: item.name, order: item.order, check: item.selected)
+                        } else {
+                            NavigationLink(destination: ItemEditView(item: item))
+                            { ItemListCell(name: item.name, order: item.order, check: item.selected) }
+                        }
                     }
                         .onMove(perform: (self.sortAscending ? self.dataSource.move : nil))    // Move only allowed if ascending sort
                         .onDelete(perform: self.dataSource.delete)
@@ -51,19 +52,15 @@ struct ItemListView : View {
             .navigationBarItems(trailing:
                 HStack {
                     AddButton(destination: ItemAddView())
-                    EditSaveDoneButton(editAction: { self.editMode = .active },
-                                       saveAction: { },
-                                       doneAction: { self.editMode = .inactive },
-                                       dirty: false )
-                }
-            )
+                    EditButton()
+                } )
+            .environment(\.editMode, self.$editMode)
          }
     }
     
     public func onAppear() {
         
         self.dataSource.loadDataSource()
-        self.editMode = .inactive
     }
     
     public func onToggleSort() {

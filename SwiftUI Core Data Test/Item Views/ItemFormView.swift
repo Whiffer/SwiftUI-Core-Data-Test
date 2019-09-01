@@ -10,13 +10,11 @@ import SwiftUI
 
 struct ItemFormView: View {
 
-    //TODO:  Beta 6 - Using private @State here because the Environment editMode setter doesn't seem to work as expected
-    //    @Environment(\.editMode) var editMode: Binding<EditMode>?
-
     @Binding var textName: String
     @Binding var textOrder: String
-    var editMode: EditMode
 
+    @Binding var editMode: EditMode
+    
     var body: some View {
         
         Section(header: Text("Item".uppercased())) {
@@ -65,7 +63,7 @@ struct ItemFormView_Previews : PreviewProvider {
             Form {
                 ItemFormView(textName: .constant("Item 0"),
                              textOrder: .constant("0"),
-                             editMode: .active)
+                             editMode: .constant(.active) )
             }
         }
     }
