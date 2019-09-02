@@ -46,4 +46,3 @@ Selecting any other tab view causes a crash somewhere in the SwiftUI framework.
 
 This project is still a work in progress.  Several more changes will be made in the near future.
 
---
