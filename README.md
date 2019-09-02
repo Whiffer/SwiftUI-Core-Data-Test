@@ -1,4 +1,4 @@
-# SwiftUI-Core-Data-Data-Test
+# SwiftUI-Core-Data-Test
 
 Extended sample program to demonstrate how CoreData can be used with SwiftUI.
 This sample has been sort of a play ground to try to duplicate or reinvent some familiar 
