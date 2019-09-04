@@ -14,7 +14,8 @@ struct ItemSelectionView : View {
     @State private var editMode: EditMode = .inactive
 
     @ObservedObject var dataSource = CoreDataDataSource<Item>()
-    @ObservedObject var selection: ItemSelectionManager = ItemSelectionManager()
+//    @ObservedObject var selection: ItemSelectionManager = ItemSelectionManager()
+    @ObservedObject var selection: ItemSelectionManager = ItemSelectionManager(allowsMultipleSelections: false)
 
     var body: some View {
         

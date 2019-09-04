@@ -25,9 +25,23 @@ extension ListSelectionManager {
 
 class ListSelectionManager<T: Hashable>: ObservableObject {
     
+    init() {
+        self.allowsMultipleSelections = true
+    }
+    
+    init(allowsMultipleSelections: Bool) {
+        self.allowsMultipleSelections = allowsMultipleSelections
+    }
+    
+    private var allowsMultipleSelections: Bool
+    
     @Published var selection: Set<T> = Set<T>()
     
     func select(_ value: T) {
+        
+        if !allowsMultipleSelections && self.selection.count > 0 {
+            self.deselect(self.selection.first!)
+        }
         self.selection.insert(value)
     }
     
