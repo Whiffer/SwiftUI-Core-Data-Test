@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1322FA922307C23200DBBB0F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1322FA912307C23200DBBB0F /* README.md */; };
+		132F5A6823429BD9009F1F2B /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132F5A6723429BD9009F1F2B /* SearchView.swift */; };
+		132F5A6A23429D82009F1F2B /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132F5A6923429D82009F1F2B /* SearchBar.swift */; };
 		13752AE422F8DE1900F131BF /* ItemFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13752AE322F8DE1900F131BF /* ItemFormView.swift */; };
 		139015FD22C2E1A800EA7B48 /* ItemEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139015FC22C2E1A800EA7B48 /* ItemEditView.swift */; };
 		1390164722C312B200EA7B48 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1390164622C312B200EA7B48 /* CoreData.swift */; };
@@ -44,6 +46,8 @@
 /* Begin PBXFileReference section */
 		131A3F0622C551C3006ED555 /* SwiftUI Core Data Test.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SwiftUI Core Data Test.entitlements"; sourceTree = "<group>"; };
 		1322FA912307C23200DBBB0F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		132F5A6723429BD9009F1F2B /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		132F5A6923429D82009F1F2B /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		13752AE322F8DE1900F131BF /* ItemFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemFormView.swift; sourceTree = "<group>"; };
 		139015FC22C2E1A800EA7B48 /* ItemEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemEditView.swift; sourceTree = "<group>"; };
 		1390164622C312B200EA7B48 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
@@ -90,6 +94,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		132F5A6623429B8A009F1F2B /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				132F5A6723429BD9009F1F2B /* SearchView.swift */,
+				132F5A6923429D82009F1F2B /* SearchBar.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		1390164822C32E0200EA7B48 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +139,7 @@
 				139CD89E22C2A99400E99642 /* Item Views */,
 				13BB3F97230F1EAB00F1CA35 /* Grouped */,
 				13BB3F8C230F0FAD00F1CA35 /* Selections */,
+				132F5A6623429B8A009F1F2B /* Search */,
 				13BB3F89230EEBF300F1CA35 /* Helper Views */,
 				139CD89D22C2A96600E99642 /* Core Data Model */,
 				1390164822C32E0200EA7B48 /* Supporting Files */,
@@ -294,6 +308,7 @@
 				13B2A8FE230BA12100054945 /* Item+CoreDataClass.swift in Sources */,
 				13CFEE91230B4949002EFF1A /* ItemListCell.swift in Sources */,
 				13BB3F9A2310705C00F1CA35 /* AttributeListCell.swift in Sources */,
+				132F5A6823429BD9009F1F2B /* SearchView.swift in Sources */,
 				13B2A901230BA12100054945 /* Attribute+CoreDataProperties.swift in Sources */,
 				13B2A8FF230BA12100054945 /* Item+CoreDataProperties.swift in Sources */,
 				13BB3F8B230F028E00F1CA35 /* ItemSelectionView.swift in Sources */,
@@ -307,6 +322,7 @@
 				13CD74F6230CBCF300833465 /* AttributeFormView.swift in Sources */,
 				139CD89622C2A57800E99642 /* ItemListView.swift in Sources */,
 				13CD74F4230CBC4200833465 /* AttributeAddView.swift in Sources */,
+				132F5A6A23429D82009F1F2B /* SearchBar.swift in Sources */,
 				139CD87D22C2A4D500E99642 /* AppDelegate.swift in Sources */,
 				13B2A900230BA12100054945 /* Attribute+CoreDataClass.swift in Sources */,
 				13CD74F2230C82FF00833465 /* AttributesGroupedView.swift in Sources */,
@@ -458,7 +474,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"SwiftUI Core Data Test\"/Preview\\ Content";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 64WN437W3Z;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "SwiftUI Core Data Test/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -482,7 +498,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"SwiftUI Core Data Test\"/Preview\\ Content";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 64WN437W3Z;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "SwiftUI Core Data Test/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

@@ -285,6 +285,16 @@ class CoreDataDataSource<T: NSManagedObject>: NSObject, ObservableObject, NSFetc
         return self.allInOrder
     }
    
+    // Used to supply Data to a ForEach List
+    public func loadDataSource(predicate: NSPredicate?) -> [T] {
+        
+        self.predicate = predicate
+        self.fetchRequest = configureFetchRequest()
+        self.frc = configureFetchedResultsController()
+        
+        return self.allInOrder
+    }
+    
     // Changes the primary Sort key and re-loads the data source
     public func changeSort(key: String, ascending: Bool) {
         

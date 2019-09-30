@@ -30,6 +30,11 @@ at the time on the selection or deselection, in addition to inserting and deleti
 It also demonstrates how to create a custom ToggleStyle to use instead of the Default Switch ToggleStyle.
 Selecting Items is only allowed in Edit mode, which also exposes several commands when active.
 
+Tab 5: Demonstrates how to use a SearchBar with the CoreDataDataSource
+Added a new method to load the data source using an NSPredicate to supply data to a ForEach List.
+Created a UIViewRepresentable SearchBar that accepts the search text and returns a new
+NSPredicate back to the SwiftUI view after each keystroke.
+
 =======================
 
 CREDITS:

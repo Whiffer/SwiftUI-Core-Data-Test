@@ -48,6 +48,14 @@ struct ContentView: View {
                     }
             }
             .tag(3)
+            SearchView()
+                .tabItem {
+                    VStack {
+                        Image(systemName: "magnifyingglass")
+                        Text("Search")
+                    }
+            }
+            .tag(4)
         }
     }
 }
