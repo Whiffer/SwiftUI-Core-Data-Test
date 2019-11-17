@@ -30,6 +30,10 @@ struct SearchBar: UIViewRepresentable {
             text = searchText
             predicate = NSPredicate(format: "name contains[c] %@", searchText)
         }
+        func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+            
+        }
     }
     
     func makeCoordinator() -> SearchBar.Coordinator {
