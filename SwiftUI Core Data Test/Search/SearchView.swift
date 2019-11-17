@@ -10,10 +10,10 @@ import SwiftUI
 
 struct SearchView: View {
     
-    @State var searchText = ""
-    @State var searchPredicate: NSPredicate? = NSPredicate(format: "name contains[c] %@", "")
+    @State private var searchText = ""
+    @State private var searchPredicate: NSPredicate? = NSPredicate(format: "name contains[c] %@", "")
 
-    @ObservedObject var dataSource = CoreDataDataSource<Attribute>()
+    @ObservedObject private var dataSource = CoreDataDataSource<Attribute>()
 
     var body: some View {
         

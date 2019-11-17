@@ -11,6 +11,8 @@
 		132F5A6823429BD9009F1F2B /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132F5A6723429BD9009F1F2B /* SearchView.swift */; };
 		132F5A6A23429D82009F1F2B /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132F5A6923429D82009F1F2B /* SearchBar.swift */; };
 		13752AE422F8DE1900F131BF /* ItemFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13752AE322F8DE1900F131BF /* ItemFormView.swift */; };
+		138D3E162381286E009B0D19 /* ActivateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138D3E142381286E009B0D19 /* ActivateButton.swift */; };
+		138D3E172381286E009B0D19 /* HiddenNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138D3E152381286E009B0D19 /* HiddenNavigationLink.swift */; };
 		139015FD22C2E1A800EA7B48 /* ItemEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139015FC22C2E1A800EA7B48 /* ItemEditView.swift */; };
 		1390164722C312B200EA7B48 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1390164622C312B200EA7B48 /* CoreData.swift */; };
 		139CD87D22C2A4D500E99642 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139CD87C22C2A4D500E99642 /* AppDelegate.swift */; };
@@ -36,7 +38,6 @@
 		13CD74F4230CBC4200833465 /* AttributeAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CD74F3230CBC4200833465 /* AttributeAddView.swift */; };
 		13CD74F6230CBCF300833465 /* AttributeFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CD74F5230CBCF300833465 /* AttributeFormView.swift */; };
 		13CD74F8230CC1A100833465 /* AttributeEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CD74F7230CC1A100833465 /* AttributeEditView.swift */; };
-		13CFEE90230B4949002EFF1A /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CFEE8E230B4949002EFF1A /* AddButton.swift */; };
 		13CFEE91230B4949002EFF1A /* ItemListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CFEE8F230B4949002EFF1A /* ItemListCell.swift */; };
 		13E0535A22CFB6BB008664A4 /* ItemAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E0535922CFB6BB008664A4 /* ItemAddView.swift */; };
 		13F166AB2300732B00F4DBA0 /* CoreDataDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F166AA2300732B00F4DBA0 /* CoreDataDataSource.swift */; };
@@ -49,6 +50,8 @@
 		132F5A6723429BD9009F1F2B /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		132F5A6923429D82009F1F2B /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		13752AE322F8DE1900F131BF /* ItemFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemFormView.swift; sourceTree = "<group>"; };
+		138D3E142381286E009B0D19 /* ActivateButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivateButton.swift; sourceTree = "<group>"; };
+		138D3E152381286E009B0D19 /* HiddenNavigationLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HiddenNavigationLink.swift; sourceTree = "<group>"; };
 		139015FC22C2E1A800EA7B48 /* ItemEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemEditView.swift; sourceTree = "<group>"; };
 		1390164622C312B200EA7B48 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		139CD87922C2A4D500E99642 /* SwiftUI Core Data Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUI Core Data Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,7 +79,6 @@
 		13CD74F3230CBC4200833465 /* AttributeAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeAddView.swift; sourceTree = "<group>"; };
 		13CD74F5230CBCF300833465 /* AttributeFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeFormView.swift; sourceTree = "<group>"; };
 		13CD74F7230CC1A100833465 /* AttributeEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeEditView.swift; sourceTree = "<group>"; };
-		13CFEE8E230B4949002EFF1A /* AddButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		13CFEE8F230B4949002EFF1A /* ItemListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListCell.swift; sourceTree = "<group>"; };
 		13E0535922CFB6BB008664A4 /* ItemAddView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemAddView.swift; sourceTree = "<group>"; };
 		13F166AA2300732B00F4DBA0 /* CoreDataDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataDataSource.swift; sourceTree = "<group>"; };
@@ -199,8 +201,9 @@
 		13BB3F89230EEBF300F1CA35 /* Helper Views */ = {
 			isa = PBXGroup;
 			children = (
-				13CFEE8E230B4949002EFF1A /* AddButton.swift */,
 				13F9297A230E195100CB4392 /* EditSaveDoneButton.swift */,
+				138D3E142381286E009B0D19 /* ActivateButton.swift */,
+				138D3E152381286E009B0D19 /* HiddenNavigationLink.swift */,
 			);
 			path = "Helper Views";
 			sourceTree = "<group>";
@@ -326,15 +329,16 @@
 				139CD87D22C2A4D500E99642 /* AppDelegate.swift in Sources */,
 				13B2A900230BA12100054945 /* Attribute+CoreDataClass.swift in Sources */,
 				13CD74F2230C82FF00833465 /* AttributesGroupedView.swift in Sources */,
+				138D3E162381286E009B0D19 /* ActivateButton.swift in Sources */,
 				139CD88422C2A4D500E99642 /* ContentView.swift in Sources */,
 				13F166AB2300732B00F4DBA0 /* CoreDataDataSource.swift in Sources */,
 				139CD87F22C2A4D500E99642 /* SceneDelegate.swift in Sources */,
 				13BB3F96230F12D000F1CA35 /* CheckmarkToggleStyle.swift in Sources */,
 				13BB3F90230F103800F1CA35 /* AddDeleteToggleStyle.swift in Sources */,
-				13CFEE90230B4949002EFF1A /* AddButton.swift in Sources */,
 				13BB3F91230F103800F1CA35 /* ListSelectionManager.swift in Sources */,
 				13752AE422F8DE1900F131BF /* ItemFormView.swift in Sources */,
 				13CD74F8230CC1A100833465 /* AttributeEditView.swift in Sources */,
+				138D3E172381286E009B0D19 /* HiddenNavigationLink.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

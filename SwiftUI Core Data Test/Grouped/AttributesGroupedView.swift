@@ -13,7 +13,7 @@ struct AttributesGroupedView: View {
     
     @State private var editMode: EditMode = .inactive
 
-    @ObservedObject var dataSource = CoreDataDataSource<Attribute>(sortKey1: "item.order",
+    @ObservedObject private var dataSource = CoreDataDataSource<Attribute>(sortKey1: "item.order",
                                                                    sortKey2: "order",
                                                                    sectionNameKeyPath: "item.name")
     

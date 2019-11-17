@@ -10,12 +10,12 @@ import SwiftUI
 
 struct EditSaveDoneButton : View {
     
-    @Environment(\.editMode) var editMode
-    
     var editAction: () -> Void
     var saveAction: () -> Void
     var doneAction: () -> Void
     var dirty: Bool
+    
+    @Environment(\.editMode) private var editMode
     
     var body: some View {
         

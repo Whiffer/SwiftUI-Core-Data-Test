@@ -10,12 +10,12 @@ import SwiftUI
 
 struct AttributeAddView: View {
     
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
     @ObservedObject var item: Item
     
-    @State var textName: String = ""
-    @State var textOrder: String = ""
+    @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
+    
+    @State private var textName: String = ""
+    @State private var textOrder: String = ""
     
     var body: some View {
         

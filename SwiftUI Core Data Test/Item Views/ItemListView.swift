@@ -13,45 +13,49 @@ struct ItemListView : View {
     
     @State private var editMode: EditMode = .inactive
 
-    @ObservedObject var dataSource = CoreDataDataSource<Item>()
+    @ObservedObject private var dataSource = CoreDataDataSource<Item>()
     
-    @State var sortAscending: Bool = true
-    
+    @State private var sortAscending: Bool = true
+    @State private var showingItemAddView: Bool = false
+
     var body: some View {
         
         NavigationView {
-            List() {
-                
-                Section(header:
-                    HStack {
-                        Text("All Items ".uppercased() )
-                        Spacer()
-                        Image(systemName: (sortAscending ? "arrow.down" : "arrow.up"))
-                            .foregroundColor(.blue)
-                            .onTapGesture(perform: self.onToggleSort )
-                    }
-                    )
-                {
+            VStack {
+                List() {
                     
-                    ForEach(dataSource.fetchedObjects) { item in
-                        
-                        if self.editMode == .active {
-                            ItemListCell(name: item.name, order: item.order, check: item.selected)
-                        } else {
-                            NavigationLink(destination: ItemEditView(item: item))
-                            { ItemListCell(name: item.name, order: item.order, check: item.selected) }
+                    Section(header:
+                        HStack {
+                            Text("All Items ".uppercased() )
+                            Spacer()
+                            Image(systemName: (sortAscending ? "arrow.down" : "arrow.up"))
+                                .foregroundColor(.blue)
+                                .onTapGesture(perform: self.onToggleSort )
                         }
+                        )
+                    {
+                        
+                        ForEach(dataSource.fetchedObjects) { item in
+                            
+                            if self.editMode == .active {
+                                ItemListCell(name: item.name, order: item.order, check: item.selected)
+                            } else {
+                                NavigationLink(destination: ItemEditView(item: item))
+                                { ItemListCell(name: item.name, order: item.order, check: item.selected) }
+                            }
+                        }
+                            .onMove(perform: (self.sortAscending ? self.dataSource.move : nil))    // Move only allowed if ascending sort
+                            .onDelete(perform: self.dataSource.delete)
                     }
-                        .onMove(perform: (self.sortAscending ? self.dataSource.move : nil))    // Move only allowed if ascending sort
-                        .onDelete(perform: self.dataSource.delete)
                 }
+                HiddenNavigationLink(destination: ItemAddView(), isActive: self.$showingItemAddView)
             }
             .onAppear(perform: { self.onAppear() })
             .listStyle(GroupedListStyle())
             .navigationBarTitle(Text("Items"), displayMode: .large)
             .navigationBarItems(trailing:
                 HStack {
-                    AddButton(destination: ItemAddView())
+                    ActivateButton(activates: self.$showingItemAddView) { Image(systemName: "plus") }
                     EditButton()
                 } )
             .environment(\.editMode, self.$editMode)

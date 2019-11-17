@@ -4,13 +4,15 @@ Extended sample program to demonstrate how CoreData can be used with SwiftUI.
 This sample has been sort of a play ground to try to duplicate or reinvent some familiar 
 UIKit patterns using SwiftUI that are common with some Core Data based Apps.
 
-This project currently compiles and runs on Xcode 11.0 Beta 7 
+This project currently compiles and runs on Xcode Version 11.2.1 (11B500)
 Current development testing has mostly been on iPhone devices.
-It does run on iPad and macOS with a few size class issues.
+It does run on iPad and macOS with a few size class issues (not a priority for me here.)
 
 The key component of this sample is the class CoreDataDataSource which encapsulates
 much of the functionality of an NSFetchedResultsController for use with SwiftUI.
 This version of CoreDataDataSource has several custom initializers for extended capabilities.
+
+This project is still a work in progress.  Several more changes will be made in the near future.
 
 =======================
 
@@ -45,9 +47,10 @@ https://stackoverflow.com/questions/57496453/swiftui-how-do-i-make-edit-rows-in-
 
 KNOWN ISSUES:
 
-1.  Start the App and then Select the Side by Side tab, tap Edit in either of the two views. 
-Selecting any other tab view causes a crash somewhere in the SwiftUI framework. 
-(No longer an issue in Beta 7). 
+1. https://github.com/Whiffer/SwiftUI-Core-Data-Test/issues/1
+There is a weird issue when reordering rows in a list. This only happens when dragging a row up, 
+and only when dragged one position up.
 
-This project is still a work in progress.  Several more changes will be made in the near future.
-
+2. There were occasional crashes due to having used NavigationLink's as navigationBarItems.
+This used to work fine, but now seems to crash.  This problem was fixed by adding the
+HiddenNavigationLink() and ActivateButton() helper views. 

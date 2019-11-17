@@ -17,10 +17,10 @@ extension String {
 
 struct ItemAddView : View {
     
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
     
-    @State var textName: String = ""
-    @State var textOrder: String = ""
+    @State private var textName: String = ""
+    @State private var textOrder: String = ""
     
     var body: some View {
         

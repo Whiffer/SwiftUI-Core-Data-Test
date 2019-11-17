@@ -10,45 +10,50 @@ import SwiftUI
 
 struct ItemEditView : View {
     
-    @State private var editMode: EditMode = .inactive
-
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
     var item: Item
     
-    @State var textName: String = ""
-    @State var textOrder: String = ""
+    @State private var editMode: EditMode = .inactive
+
+    @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
+
+    @State private var textName: String = ""
+    @State private var textOrder: String = ""
     
-    @ObservedObject var dataSource = CoreDataDataSource<Attribute>(predicateKey: "item")
+    @ObservedObject private var dataSource = CoreDataDataSource<Attribute>(predicateKey: "item")
+    
+    @State private var showingAttributeAddView = false
     
     var body: some View {
         
-        Form {
-            
-            ItemFormView(textName: self.$textName,
-                         textOrder: self.$textOrder,
-                         editMode: self.$editMode)
-             
-            Section(header: Text("Attributes".uppercased())) {
-                ForEach(dataSource.loadDataSource(relatedTo: item)) { attribute in
-                    
-                    if self.editMode == .active {
-                        AttributeListCell(name: attribute.name, order: attribute.order)
-                    } else {
-                        NavigationLink(destination: AttributeEditView(attribute: attribute))
-                        { AttributeListCell(name: attribute.name, order: attribute.order) }
+        VStack {
+            Form {
+                
+                ItemFormView(textName: self.$textName,
+                             textOrder: self.$textOrder,
+                             editMode: self.$editMode)
+                 
+                Section(header: Text("Attributes".uppercased())) {
+                    ForEach(dataSource.loadDataSource(relatedTo: item)) { attribute in
+                        
+                        if self.editMode == .active {
+                            AttributeListCell(name: attribute.name, order: attribute.order)
+                        } else {
+                            NavigationLink(destination: AttributeEditView(attribute: attribute))
+                            { AttributeListCell(name: attribute.name, order: attribute.order) }
+                        }
                     }
+                    .onMove(perform: self.dataSource.move)
+                    .onDelete(perform: self.dataSource.delete)
                 }
-                .onMove(perform: self.dataSource.move)
-                .onDelete(perform: self.dataSource.delete)
             }
+            HiddenNavigationLink(destination: AttributeAddView(item: item), isActive: self.$showingAttributeAddView)
         }
         .onAppear(perform: { self.onAppear() })
         .navigationBarTitle(Text("\(self.editMode == .active ? "Edit" : "View") Item Details"),
                             displayMode: .large)
         .navigationBarItems(trailing:
             HStack {
-                AddButton(destination: AttributeAddView(item: item))
+                ActivateButton(activates: self.$showingAttributeAddView) { Image(systemName: "plus") }
                 EditSaveDoneButton(editAction: { self.editMode = .active },
                                    saveAction: { self.saveAction() },
                                    doneAction: { self.editMode = .inactive },
