@@ -11,12 +11,11 @@ import CoreData
 
 struct ItemListView : View {
     
-    @State private var editMode: EditMode = .inactive
-
-    @ObservedObject private var dataSource = CoreDataDataSource<Item>()
-    
+    @StateObject private var dataSource = CoreDataDataSource<Item>()
     @State private var sortAscending: Bool = true
+    
     @State private var showingItemAddView: Bool = false
+    @State private var editMode: EditMode = .inactive
 
     var body: some View {
         
@@ -35,7 +34,9 @@ struct ItemListView : View {
                         )
                     {
                         
-                        ForEach(dataSource.fetchedObjects) { item in
+                        ForEach(self.dataSource
+                            .sortAscending1(self.sortAscending)
+                            .objects) { item in
                             
                             if self.editMode == .active {
                                 ItemListCell(name: item.name, order: item.order, check: item.selected)
@@ -50,7 +51,6 @@ struct ItemListView : View {
                 }
                 HiddenNavigationLink(destination: ItemAddView(), isActive: self.$showingItemAddView)
             }
-            .onAppear(perform: { self.onAppear() })
             .listStyle(GroupedListStyle())
             .navigationBarTitle(Text("Items"), displayMode: .large)
             .navigationBarItems(trailing:
@@ -61,16 +61,10 @@ struct ItemListView : View {
             .environment(\.editMode, self.$editMode)
          }
     }
-    
-    public func onAppear() {
         
-        self.dataSource.loadDataSource()
-    }
-    
     public func onToggleSort() {
         
         self.sortAscending.toggle()
-        self.dataSource.changeSort(key: "order", ascending: self.sortAscending)
     }
     
 }

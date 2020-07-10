@@ -10,11 +10,11 @@ import SwiftUI
 
 struct SearchView: View {
     
-    @State private var searchText = ""
+    @StateObject private var dataSource = CoreDataDataSource<Attribute>()
     @State private var searchPredicate: NSPredicate? = NSPredicate(format: "name contains[c] %@", "")
 
-    @ObservedObject private var dataSource = CoreDataDataSource<Attribute>()
-
+    @State private var searchText = ""
+    
     var body: some View {
         
         NavigationView {
@@ -23,7 +23,9 @@ struct SearchView: View {
                 List {
                     Section(header: Text("ATTRIBUTES CONTAINING: '\(self.searchText)'"))
                     {
-                        ForEach(self.dataSource.loadDataSource(predicate: self.searchPredicate)) { attribute in
+                        ForEach(self.dataSource
+                            .predicate(self.searchPredicate)
+                            .objects) { attribute in
 
                             AttributeListCell(name: attribute.name,
                                               order: attribute.order)

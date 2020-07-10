@@ -22,6 +22,7 @@ struct AttributeEditView: View {
         Form {
             AttributeFormView(textName: self.$textName, textOrder: self.$textOrder)
         }
+        .navigationBarBackButtonHidden(true)
         .onAppear(perform: { self.onAppear() })
         .navigationBarTitle(Text("Edit Attribute"), displayMode: .large)
         .navigationBarItems(leading: Button(action:{ self.cancelAction() }) { Text("Cancel") },

@@ -12,16 +12,16 @@ struct ItemEditView : View {
     
     var item: Item
     
-    @State private var editMode: EditMode = .inactive
-
+    @StateObject private var dataSource = CoreDataDataSource<Attribute>(predicateKey: "item")
+    
     @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
 
     @State private var textName: String = ""
     @State private var textOrder: String = ""
     
-    @ObservedObject private var dataSource = CoreDataDataSource<Attribute>(predicateKey: "item")
-    
     @State private var showingAttributeAddView = false
+    
+    @State private var editMode: EditMode = .inactive
     
     var body: some View {
         
@@ -33,7 +33,9 @@ struct ItemEditView : View {
                              editMode: self.$editMode)
                  
                 Section(header: Text("Attributes".uppercased())) {
-                    ForEach(dataSource.loadDataSource(relatedTo: item)) { attribute in
+                    ForEach(self.dataSource
+                        .predicateObject(self.item)
+                        .objects) { attribute in
                         
                         if self.editMode == .active {
                             AttributeListCell(name: attribute.name, order: attribute.order)

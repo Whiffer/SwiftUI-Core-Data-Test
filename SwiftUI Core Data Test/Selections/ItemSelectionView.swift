@@ -11,13 +11,12 @@ import CoreData
 
 struct ItemSelectionView : View {
     
+    @StateObject private var dataSource = CoreDataDataSource<Item>()
+    @ObservedObject private var selection: ItemSelectionManager = ItemSelectionManager()
+//    @ObservedObject private var selection: ItemSelectionManager = ItemSelectionManager(allowsMultipleSelections: false)
+
     @State private var editMode: EditMode = .inactive
-
-    @ObservedObject private var dataSource = CoreDataDataSource<Item>()
     
-//    @ObservedObject private var selection: ItemSelectionManager = ItemSelectionManager()
-    @ObservedObject private var selection: ItemSelectionManager = ItemSelectionManager(allowsMultipleSelections: false)
-
     var body: some View {
         
         NavigationView {
@@ -26,7 +25,8 @@ struct ItemSelectionView : View {
                     
                     Section(header: Text("All Items ".uppercased()) )
                     {
-                        ForEach(self.dataSource.fetchedObjects) { item in
+                        ForEach(self.dataSource
+                            .objects) { item in
                             
                             HStack {
                                 if self.editMode == .active {
@@ -73,7 +73,6 @@ struct ItemSelectionView : View {
     
     public func onAppear() {
         
-        self.dataSource.loadDataSource()
         self.selection.selection = Set<Item>(Item.allSelectedItems())
     }
     

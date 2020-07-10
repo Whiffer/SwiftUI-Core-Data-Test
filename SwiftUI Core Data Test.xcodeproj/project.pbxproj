@@ -23,6 +23,7 @@
 		139CD88922C2A4D600E99642 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 139CD88822C2A4D600E99642 /* Preview Assets.xcassets */; };
 		139CD88C22C2A4D600E99642 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 139CD88A22C2A4D600E99642 /* LaunchScreen.storyboard */; };
 		139CD89622C2A57800E99642 /* ItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139CD89522C2A57800E99642 /* ItemListView.swift */; };
+		13B16F1824B6679C00418EA1 /* ManagedObjectContextDidSaveNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B16F1724B6679C00418EA1 /* ManagedObjectContextDidSaveNotifications.swift */; };
 		13B2A8FE230BA12100054945 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B2A8FA230BA12100054945 /* Item+CoreDataClass.swift */; };
 		13B2A8FF230BA12100054945 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B2A8FB230BA12100054945 /* Item+CoreDataProperties.swift */; };
 		13B2A900230BA12100054945 /* Attribute+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B2A8FC230BA12100054945 /* Attribute+CoreDataClass.swift */; };
@@ -49,6 +50,7 @@
 		1322FA912307C23200DBBB0F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		132F5A6723429BD9009F1F2B /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		132F5A6923429D82009F1F2B /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		1370C28824B52FA400D50333 /* CodeExamples.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeExamples.swift; sourceTree = "<group>"; };
 		13752AE322F8DE1900F131BF /* ItemFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemFormView.swift; sourceTree = "<group>"; };
 		138D3E142381286E009B0D19 /* ActivateButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivateButton.swift; sourceTree = "<group>"; };
 		138D3E152381286E009B0D19 /* HiddenNavigationLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HiddenNavigationLink.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 		139CD88B22C2A4D600E99642 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		139CD88D22C2A4D600E99642 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		139CD89522C2A57800E99642 /* ItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListView.swift; sourceTree = "<group>"; };
+		13B16F1724B6679C00418EA1 /* ManagedObjectContextDidSaveNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObjectContextDidSaveNotifications.swift; sourceTree = "<group>"; };
 		13B2A8FA230BA12100054945 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
 		13B2A8FB230BA12100054945 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		13B2A8FC230BA12100054945 /* Attribute+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attribute+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -120,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				1322FA912307C23200DBBB0F /* README.md */,
+				1370C28824B52FA400D50333 /* CodeExamples.swift */,
 				139CD87B22C2A4D500E99642 /* SwiftUI Core Data Test */,
 				139CD87A22C2A4D500E99642 /* Products */,
 			);
@@ -163,6 +167,7 @@
 			children = (
 				1390164622C312B200EA7B48 /* CoreData.swift */,
 				13F166AA2300732B00F4DBA0 /* CoreDataDataSource.swift */,
+				13B16F1724B6679C00418EA1 /* ManagedObjectContextDidSaveNotifications.swift */,
 				139CD88022C2A4D500E99642 /* SwiftUI_Core_Data_Test.xcdatamodeld */,
 				13B2A8FA230BA12100054945 /* Item+CoreDataClass.swift */,
 				13B2A8FB230BA12100054945 /* Item+CoreDataProperties.swift */,
@@ -320,6 +325,7 @@
 				13BB3F9C2310B09300F1CA35 /* UserEnvironment.swift in Sources */,
 				139CD88222C2A4D500E99642 /* SwiftUI_Core_Data_Test.xcdatamodeld in Sources */,
 				1390164722C312B200EA7B48 /* CoreData.swift in Sources */,
+				13B16F1824B6679C00418EA1 /* ManagedObjectContextDidSaveNotifications.swift in Sources */,
 				13E0535A22CFB6BB008664A4 /* ItemAddView.swift in Sources */,
 				13F9297B230E195100CB4392 /* EditSaveDoneButton.swift in Sources */,
 				13CD74F6230CBCF300833465 /* AttributeFormView.swift in Sources */,
@@ -481,7 +487,7 @@
 				DEVELOPMENT_TEAM = 64WN437W3Z;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "SwiftUI Core Data Test/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -505,7 +511,7 @@
 				DEVELOPMENT_TEAM = 64WN437W3Z;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "SwiftUI Core Data Test/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
